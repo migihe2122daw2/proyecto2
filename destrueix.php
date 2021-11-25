@@ -17,7 +17,7 @@
 			setcookie(session_name(),'',time() - 86400, $cookie_sessio['path'], $cookie_sessio['domain'], $cookie_sessio['secure'], $cookie_sessio['httponly']); 
 			session_destroy();
 			break;
-			//prueba
+			//prueba2222
 		}
 	}
 ?>
