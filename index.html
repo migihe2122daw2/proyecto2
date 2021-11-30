@@ -1,29 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sessió</title>
 </head>
+
 <body>
-        <title>
-			FORMULARI PER ACCEDIR A LA SESSIÓ
-		</title>
-		<form action="phppueba.php" method="POST">
-            Indica si ets usuari, bibliotecari o cap de biblioteca:
-            <div>
-                <input type="radio">
-                <label>Usuari</label>
-                <input type="radio">
-                <label>Bibliotecari</label>
-                <input type="radio">
-                <label>Cap de biblioteca</label>
-            </div>
-			Indica el el nom d'usuari: <input type="text" value="usuari"><br>
-			Indica la contrasenya: <input type="password" value="password"><br>
-			<input for="phppueba" type="submit" value="Envia"/>
-		</form>
+    <title>
+        FORMULARI PER ACCEDIR A LA SESSIÓ
+    </title>
+    <form action="login.php" method="POST">
+        <div>
+            <p>Indica si ets usuari, bibliotecari o cap de biblioteca:</p>
+            <input type="radio" id="Usuari" name="login">
+            <label for="Usuari">Usuari</label><br>
+            <input type="radio" id="Bibliotecari" name="login">
+            <label for="Bibliotecari">Bibliotecari</label><br>
+            <input type="radio" id="Cap de biblioteca" name="login">
+            <label for="Cap de biblioteca">Cap de biblioteca</label><br><br>
+            <input type="submit" value="Submit">
+        </div>
+        Indica el el nom d'usuari: <input type="text" value="usuari" name="usuario"><br>
+        Indica la contrasenya: <input type="password" value="password" name="contrasena"><br>
+        <input for="login" type="submit" value="Envia" />
+    </form>
 
 </body>
+
 </html>
