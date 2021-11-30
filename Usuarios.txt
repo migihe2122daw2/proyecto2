@@ -1,1 +1,4 @@
-usuario:contrasena:Nombre:Apellido1:Apellido2:residencia:email:telefono:idPersonal:prestado:fechaPrestamo:ISBN
+usuario:contrasena
+a:a
+b:b
+c:c

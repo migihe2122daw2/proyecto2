@@ -1,10 +1,6 @@
 <?php
 
-   // Iniciamos la sesion
-
-    session_start();
-
-    // Abrir archivo login.txt
+   // Abrir archivo login.txt
 
     $archivo = fopen("Usuarios.txt", "r");
 
@@ -15,44 +11,55 @@
 
         $contrasena = $_POST["contrasena"];
 
+        $lineas = explode("\n", fread($archivo, filesize("Usuarios.txt"))); // leemos el archivo y lo guardamos en un array
+
+        foreach ($lineas as $linea) {
+            list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
+
+            if ($usuariotxt == $usuario && $contrasenatxt == $contrasena) {
+                session_start();
+                $_SESSION["usuario"] = $usuario;
+                $_SESSION["contrasena"] = $contrasena;
+                echo "Bienvenido " . $usuario;
+                header("Location: index.php");
+            }
+        }
+
+
         while (!feof($archivo)) {
             $linea = fgets($archivo);
 
             $datos = explode(":", $linea);
 
-            if ($usuario == $datos[0] && $contrasena == $datos[1]) {
-                $_SESSION["usuario"] = $usuario;
+            echo $datos[$numLinea][0];
+            echo $datos[$numLinea][1];
+            echo "<br>";
+            echo $usuario;
+            echo $contrasena;
+            echo "<br>";
 
+
+            if ($datos[0] == $usuario && $datos[1] == $contrasena) {
+                echo "Usuario y contraseña correctos";
+                echo "<br>";
+                echo "Bienvenido " . $usuario;
+
+                $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                $_SESSION["nombre"] = $datos[2];
+                header("Refresh: 5 usuaris.html");
 
-                $_SESSION["apellidos"] = $datos[3];
-
-                $_SESSION["edad"] = $datos[4];
-
-                $_SESSION["email"] = $datos[5];
-
-                $_SESSION["fecha"] = $datos[6];
-
-                // Si el usuario y la contraseña son correctos, redirigimos a la pagina principal
-
-
-                // comprobar si es usuario, bibliotecario o administrador
-
-                
-
-            }
-            else {
-                echo "Usuario o contraseña incorrectos";
-
-                // Esperar 5 segundos y redirigir a la pagina de login
-
-                header("Refresh: 5; url=index.html");
                 break;
+            }else {
 
-                // Si el usuario y la contraseña no son correctos, redirigimos a la pagina de login
+                echo "Usuario o contraseña incorrectos";
+                //Rediriigimos a la pagina de login en 5 segundos
+
+                header("refresh:5; url=index.html");
+                break;
             }
         }
     }
+    
+    
 ?>

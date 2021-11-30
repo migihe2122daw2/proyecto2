@@ -11,7 +11,7 @@
 			fclose($fitxer);
 			session_name($_POST["usuari"]);
 			session_start();
-			break;
+			break;    
 		}
 	}
 ?>
