@@ -127,7 +127,7 @@
         public function toString(){
             return "Nombre: " . $this->nombre . " Apellido1: " . $this->apellido1 . " Apellido2: " . $this->apellido2 . " Residencia: " . $this->residencia . " Email: " . $this->email . " Telefono: " . $this->telefono . " IdPersonal: " . $this->idPersonal . " Contraseña: " . $this->contrasena . " Prestado: " . $this->prestado . " FechaPrestamo: " . $this->fechaPrestamo . " ISBN: " . $this->ISBN;
         }
-
+/*
         // Método para crear un usuario y meterlo en Ususarios.txt
 
         public static function crearUsuario($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN){
@@ -142,7 +142,7 @@
             fwrite($archivo, $this->toString() . PHP_EOL);
             fclose($archivo);
         }
-
+*/
         // Método para leer todos los usuarios de Ususarios.txt
 
         public static function leerUsuarios(){

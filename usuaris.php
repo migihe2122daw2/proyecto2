@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $_SESSION['usuario'] = 'Pedro';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +19,24 @@
             width: 100%;
             height: 100%;
         }
+        p{
+            font-weight: bold;
+        }
+        #cerrar{
+            padding: 10vh;
+            text-decoration: none;
+            color: black;
+        }
+        #cerrar:hover{
+            color:red;
+        }
+        
     </style>
 </head>
 <body>
-    <p>USUARI</p>
+    <p>USUARI <?php echo $usuario?></p>
     <a href="">Visualització llista de llibres disponibles</a>
-    <a href="">Visualització dades personal</a>
+    <a href="usuariPersonal.php">Visualització dades personal</a>
+    <a id="cerrar" href="">Cerrar sesión</a>
 </body>
 </html>

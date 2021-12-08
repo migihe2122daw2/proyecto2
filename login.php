@@ -21,7 +21,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
-                header("Location: index.php");
+                header("Location: usuaris.php");
             }
         }
 
@@ -47,15 +47,15 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 5; url=usuaris.html");
+                header("refresh: 5; url=usuaris.php");
 
                 break;
             }else {
 
-                echo "Usuario o contraseña incorrectos";
+                echo "<script>alert('Usuario o contraseña incorrectos')</script>";
                 //Rediriigimos a la pagina de login en 5 segundos
 
-                header("refresh:5; url=index.html");
+                header("refresh:2; url=index.html");
                 break;
             }
         }
