@@ -47,7 +47,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("Refresh: 5 usuaris.html");
+                header("refresh: 5; url=usuaris.html");
 
                 break;
             }else {
