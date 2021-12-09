@@ -6,7 +6,7 @@
 
     // Leer los datos del formulario
 
-    if ($_GET["mostrar"]){
+    if ($_GET["mostrar"]) {
 
         // Convertir a mayúsculas
 
@@ -25,7 +25,7 @@
 
                 // Mostrar los libros
 
-                $libros->mostrar();
+                $libros->mostrarLibros();
 
                 break;
             
@@ -33,6 +33,8 @@
                 echo "No se ha seleccionado ningún libro";
                 break;
     }
+    }
+
 
 ?>
 

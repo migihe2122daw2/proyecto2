@@ -74,12 +74,23 @@
         // Mètodes
 
         public function mostrar(){
-            echo "Titol: " . $this->titol . "<br>";
-            echo "Autor: " . $this->autor . "<br>";
-            echo "ISBN: " . $this->ISBN . "<br>";
-            echo "Prestec: " . $this->prestec . "<br>";
-            echo "Inici prestec: " . $this->iniciprestec . "<br>";
-            echo "Codi usuari: " . $this->codiusuari . "<br>";
+
+            // Mostrar els llibres de l'arxiu de text
+
+            $arxiu = fopen("Llibres.txt", "r");
+
+            while(!feof($arxiu)){
+                $linea = fgets($arxiu);
+            
+                $llibre = explode(":", $linea);
+                echo "<p>Titol: " . $llibre[0] . "</p>";
+                echo "<p>Autor: " . $llibre[1] . "</p>";
+                echo "<p>ISBN: " . $llibre[2] . "</p>";
+                echo "<p>Prestec: " . $llibre[3] . "</p>";
+                echo "<p>Inici prestec: " . $llibre[4] . "</p>";
+                echo "<p>Codi usuari: " . $llibre[5] . "</p>";
+            }
+
         }
 
         // Metode per crear un nou llibre al fitxer de text
