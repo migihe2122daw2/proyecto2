@@ -74,7 +74,8 @@
     <a id="cerrar" href="">Cerrar sesión</a>
 
     <form action="bibliotecaris.php">
-        <input type="submit" name="prueba" value="Crear llibre">
+        <input type="text" name="prueba">
+        <input type="submit" value="Crear llibre">
     </form>
     
 </body>
