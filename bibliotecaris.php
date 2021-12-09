@@ -45,5 +45,10 @@
     <a href="">Creació, visualització i eliminació d'usuaris</a>
     <a href="">Visualització dades personals</a>
     <a id="cerrar" href="">Cerrar sesión</a>
+
+    <form action="bibliotecaris.php">
+        <input type="submit" value="Crear llibre">
+    </form>
+    
 </body>
 </html>

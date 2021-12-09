@@ -48,7 +48,7 @@
                 $_SESSION["biblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 5; url=bibliotecaris.php");
+                header("refresh: 3; url=bibliotecaris.php");
 
                 break;
             }else {
