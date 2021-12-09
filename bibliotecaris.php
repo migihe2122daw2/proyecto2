@@ -19,7 +19,7 @@
 
                 // Crear un objeto de la clase LLibres
 
-                $libros = new Libros();
+                $libros = new Libro();
 
                 // Mostrar los libros
 
