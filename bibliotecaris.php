@@ -14,6 +14,17 @@
             width: 100%;
             height: 100%;
         }
+        p{
+            font-weight: bold;
+        }
+        #cerrar{
+            padding: 10vh;
+            text-decoration: none;
+            color: black;
+        }
+        #cerrar:hover{
+            color:red;
+        }
     </style>
 </head>
 <body>
@@ -21,5 +32,6 @@
     <a href="">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="">Creació, visualització i eliminació d'usuaris</a>
     <a href="">Visualització dades personals</a>
+    <a id="cerrar" href="">Cerrar sesión</a>
 </body>
 </html>

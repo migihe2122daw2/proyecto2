@@ -2,28 +2,27 @@
 
    // Abrir archivo login.txt
 
-    $archivo = fopen("Bibliotecaris.txt", "r");
+    $archivo = fopen("Capbiblio.txt", "r");
 
     // comprobamos que el usuario y la contraseña sean correctos
 
-    if (isset($_POST["biblio"], $_POST["contrasena"])) {
-        $usuario = $_POST["biblio"];
+    if (isset($_POST["capbiblio"], $_POST["contrasena"])) {
+        $usuario = $_POST["capbiblio"];
 
         $contrasena = $_POST["contrasena"];
 
-        $lineas = explode("\n", fread($archivo, filesize("Biliotecaris.txt"))); // leemos el archivo y lo guardamos en un array
+        $lineas = explode("\n", fread($archivo, filesize("Capbiblio.txt"))); // leemos el archivo y lo guardamos en un array
 
         foreach ($lineas as $linea) {
             list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
 
             if ($usuariotxt == $usuario && $contrasenatxt == $contrasena) {
                 session_start();
-                $_SESSION["biblio"] = $usuario;
+                $_SESSION["capbiblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
-                header("Location: bibliotecaris.php");
+                header("Location: capbiblio.php");
             }
-        
         }
 
 
@@ -45,10 +44,10 @@
                 echo "<br>";
                 echo "Bienvenido " . $usuario;
 
-                $_SESSION["biblio"] = $usuario;
+                $_SESSION["capbiblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 5; url=bibliotecaris.php");
+                header("refresh: 5; url=capbiblio.php");
 
                 break;
             }else {
