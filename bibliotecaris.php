@@ -4,7 +4,34 @@
 
     require_once("claseLibro.php");
 
-    // Crear objetos
+    if ($_GET["prueba"]) {
+
+        // Convertir a mayúsculas
+
+        $mostrar = strtoupper($_GET["prueba"]);
+        
+
+        // Switch para mostrar los libros
+
+        switch ($mostrar) {
+
+            case "MOSTRAR":
+
+                // Crear un objeto de la clase LLibres
+
+                $libros = new Libros();
+
+                // Mostrar los libros
+
+                $libros->mostrar();
+
+                break;
+            
+            default:
+                echo "No se ha seleccionado ningún libro";
+                break;
+    }
+    }
 
    
 
@@ -47,7 +74,7 @@
     <a id="cerrar" href="">Cerrar sesión</a>
 
     <form action="bibliotecaris.php">
-        <input type="submit" value="Crear llibre">
+        <input type="submit" name="prueba" value="Crear llibre">
     </form>
     
 </body>
