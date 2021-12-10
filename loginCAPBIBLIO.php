@@ -21,7 +21,7 @@
                 $_SESSION["capbiblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
-                header("Location: capbiblio.php");
+                header("Location: capbiblio.html");
             }
         }
 
@@ -47,7 +47,7 @@
                 $_SESSION["capbiblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 5; url=capbiblio.php");
+                header("refresh: 3; url=capbiblio.html");
 
                 break;
             }else {

@@ -21,7 +21,7 @@
                 $_SESSION["biblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
-                header("Location: bibliotecaris.php");
+                header("Location: bibliotecaris.html");
             }
         
         }
@@ -48,7 +48,7 @@
                 $_SESSION["biblio"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 3; url=bibliotecaris.php");
+                header("refresh: 3; url=bibliotecaris.html");
 
                 break;
             }else {
