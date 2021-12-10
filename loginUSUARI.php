@@ -22,7 +22,7 @@
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
                 echo "Sessio de usuario:" .session_id();
-                header("Refresh: 4 usuaris.html");
+                header("Location: usuaris.html");
             }
         }
 
