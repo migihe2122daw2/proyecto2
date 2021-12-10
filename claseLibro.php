@@ -97,7 +97,53 @@
 
         public function crearLlibre(){
             $fitxer = fopen("Llibres.txt", "a");
-            fwrite($fitxer, $this->titol . "," . $this->autor . "," . $this->ISBN . "," . $this->prestec . "," . $this->iniciprestec . "," . $this->codiusuari . "\n");
+            // Preguntar els dades del llibre
+
+            echo "<p>Introdueix el titol del llibre: </p>";
+            echo "<form action='claseLibro.php' method='post'>";
+            echo "<input type='text' name='titol'><br>";
+
+            echo "<p>Introdueix el autor del llibre: </p>";
+            echo "<input type='text' name='autor'><br>";
+            
+            echo "<p>Introdueix el ISBN del llibre: </p>";
+            echo "<input type='text' name='ISBN'><br>";
+
+            echo "<p>Introdueix si el llibre es prestarà: </p>";
+            echo "<input type='checkbox' name='prestec'><br>";
+
+            echo "<p>Introdueix la data d'inici del prestec: </p>";
+            echo "<input type='date' name='inicprestec'><br>";
+
+            echo "<p>Introdueix el codi de l'usuari: </p>";
+            echo "<input type='text' name='codiusuari'><br>";
+
+            echo "<input type='submit' value='Crear llibre'>";
+            echo "</form>";
+
+            // Crear el llibre
+
+            if (isset($_POST['titol'])) {
+                $titolCrear = $_POST['titol'];
+                $autorCrear = $_POST['autor'];
+                $ISBNCrear = $_POST['ISBN'];
+                $prestecCrear = $_POST['prestec'];
+                $iniciprestecCrear = $_POST['inicprestec'];
+                $codiusuariCrear = $_POST['codiusuari'];
+
+                // Mostrar el llibre creat per pantalla
+
+                echo "<p>Titol: " . $titolCrear . "</p>";
+                echo "<p>Autor: " . $autorCrear . "</p>";
+                echo "<p>ISBN: " . $ISBNCrear . "</p>";
+                echo "<p>Prestec: " . $prestecCrear . "</p>";
+                echo "<p>Inici prestec: " . $iniciprestecCrear . "</p>";
+                echo "<p>Codi usuari: " . $codiusuariCrear . "</p>";
+
+                $linea = $titolCrear . ":" . $autorCrear . ":" . $ISBNCrear . ":" . $prestecCrear . ":" . $iniciprestecCrear . ":" . $codiusuariCrear . "\n";
+                fwrite($fitxer, $linea);
+            }
+
             fclose($fitxer);
         }
 

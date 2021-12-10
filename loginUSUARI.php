@@ -21,6 +21,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
+                echo "Sessio de usuario:" .session_id();
                 header("Location: usuaris.php");
             }
         }

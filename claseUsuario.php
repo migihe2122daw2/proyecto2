@@ -143,16 +143,20 @@
             fclose($archivo);
         }
 */
-        // Método para leer todos los usuarios de Ususarios.txt
+        // Método para leer un usuario por su idPersonal´
 
-        public static function leerUsuarios(){
+        public static function leerUsuario($idPersonal){
             $archivo = fopen("Usuarios.txt", "r");
-            $usuarios = array();
             while(!feof($archivo)){
-                $usuarios[] = fgets($archivo);
+                $linea = fgets($archivo);
+                $datos = explode("-", $linea);
+                if($datos[6] == $idPersonal){
+                    $usuario = new Usuario($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $datos[10]);
+                    fclose($archivo);
+                    return $usuario;
+                }
             }
             fclose($archivo);
-            return $usuarios;
         }
 
     }

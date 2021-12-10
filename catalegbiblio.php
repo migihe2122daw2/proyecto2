@@ -6,6 +6,7 @@
 
     // Leer los datos del formulario
 
+
     if ($_GET["mostrar"]) {
 
         // Convertir a mayúsculas
@@ -27,6 +28,17 @@
 
                 $libros->mostrar();
 
+                break;
+            case "CREAR":
+
+                // Crear un objeto de la clase LLibres
+    
+                $libros = new Libro();
+    
+                // Mostrar los libros
+    
+                $libros->crearLlibre();
+    
                 break;
             
             default:
