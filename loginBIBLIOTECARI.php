@@ -1,8 +1,9 @@
 <?php
 
    // Abrir archivo login.txt
-
-    $archivo = fopen("Bibliotecaris.txt", "r");
+    $filename='Bibliotecaris.txt';
+    $archivo = fopen($filename, "rb");
+    
 
     // comprobamos que el usuario y la contraseña sean correctos
 
@@ -11,7 +12,9 @@
 
         $contrasena = $_POST["contrasena"];
 
-        $lineas = explode("\n", fread($archivo, filesize("Biliotecaris.txt"))); // leemos el archivo y lo guardamos en un array
+        // leemos el archivo y lo guardamos en un array
+
+        $lineas = file($filename);
 
         foreach ($lineas as $linea) {
             list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
@@ -56,7 +59,7 @@
                 echo "<script>alert('Usuario o contraseña incorrectos')</script>";
                 //Rediriigimos a la pagina de login en 5 segundos
 
-                header("refresh:2; url=INDEX.html");
+                header("refresh:2; url=index.html");
                 break;
             }
         }
