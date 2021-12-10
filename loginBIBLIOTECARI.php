@@ -56,7 +56,7 @@
                 echo "<script>alert('Usuario o contraseña incorrectos')</script>";
                 //Rediriigimos a la pagina de login en 5 segundos
 
-                header("refresh:2; url=index.html");
+                header("refresh:2; url=INDEX.html");
                 break;
             }
         }
