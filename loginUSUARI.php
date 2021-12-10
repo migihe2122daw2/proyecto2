@@ -21,7 +21,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
                 echo "Bienvenido " . $usuario;
-                header("Location: usuaris.php");
+                header("Location: usuaris.html");
             }
         }
 
@@ -47,7 +47,7 @@
                 $_SESSION["usuario"] = $usuario;
                 $_SESSION["contrasena"] = $contrasena;
 
-                header("refresh: 5; url=usuaris.php");
+                header("refresh: 3; url=usuaris.html");
 
                 break;
             }else {
