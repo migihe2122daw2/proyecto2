@@ -8,15 +8,15 @@
         private $iniciprestec;
         private $codiusuari;
 
-        // Constructor
+        // Constructor por defecto
 
-        public function __construct($titol, $autor, $ISBN, $prestec, $iniciprestec, $codiusuari){
-            $this->titol = $titol;
-            $this->autor = $autor;
-            $this->ISBN = $ISBN;
-            $this->prestec = $prestec;
-            $this->iniciprestec = $iniciprestec;
-            $this->codiusuari = $codiusuari;
+        public function __construct(){
+            $this->titol = "";
+            $this->autor = "";
+            $this->ISBN = "";
+            $this->prestec = false;
+            $this->inicprestec = "";
+            $this->codiusuari = "";
         }
 
         // Getters

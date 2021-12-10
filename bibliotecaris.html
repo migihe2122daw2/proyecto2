@@ -1,41 +1,3 @@
-<?php
-
-    // Importar classes
-
-    require_once("claseLibro.php");
-
-    if ($_GET["prueba"]) {
-
-        // Convertir a mayúsculas
-
-        $mostrar = strtoupper($_GET["prueba"]);
-        
-
-        // Switch para mostrar los libros
-
-        switch ($mostrar) {
-
-            case "MOSTRAR":
-
-                // Crear un objeto de la clase LLibres
-
-                $libros = new Libro();
-
-                // Mostrar los libros
-
-                $libros->mostrar();
-
-                break;
-            
-            default:
-                echo "No se ha seleccionado ningún libro";
-                break;
-    }
-    }
-
-   
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,15 +30,9 @@
 </head>
 <body>
     <p>BIBLIOTECARI</p>
-    <a href="">Creació, visualització i eliminació llibres del catàleg</a>
+    <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="">Creació, visualització i eliminació d'usuaris</a>
     <a href="">Visualització dades personals</a>
     <a id="cerrar" href="">Cerrar sesión</a>
-
-    <form action="bibliotecaris.php">
-        <input type="text" name="prueba">
-        <input type="submit" value="Crear llibre">
-    </form>
-    
 </body>
 </html>

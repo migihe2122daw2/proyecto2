@@ -2,7 +2,7 @@
 
     // Incluir la clase LLibres
 
-    require_once("LLibres.php");
+    require_once("claseLibro.php");
 
     // Leer los datos del formulario
 
@@ -21,11 +21,11 @@
 
                 // Crear un objeto de la clase LLibres
 
-                $libros = new LLibres();
+                $libros = new Libro();
 
                 // Mostrar los libros
 
-                $libros->mostrarLibros();
+                $libros->mostrar();
 
                 break;
             
