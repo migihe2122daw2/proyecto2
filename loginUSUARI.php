@@ -2,65 +2,34 @@
 
    // Abrir archivo login.txt
 
-    $archivo = fopen("Usuarios.txt", "r");
+   $fitxer_usuaris="Usuarios.txt";
+   $fp=fopen($fitxer_usuaris,"r") or die ("No s'ha pogut validar l'usuari");
 
-    // comprobamos que el usuario y la contraseña sean correctos
+    if ($fp) {
+        $mida_fitxer=filesize($fitxer_usuaris);
+        $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
+    }
 
-    if (isset($_POST["usuario"], $_POST["contrasena"])) {
-        $usuario = $_POST["usuario"];
-
-        $contrasena = $_POST["contrasena"];
-
-        $lineas = explode("\n", fread($archivo, filesize("Usuarios.txt"))); // leemos el archivo y lo guardamos en un array
-
-        foreach ($lineas as $linea) {
-            list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
-
-            if ($usuariotxt == $usuario && $contrasenatxt == $contrasena) {
-                session_start();
-                $_SESSION["usuario"] = $usuario;
-                $_SESSION["contrasena"] = $contrasena;
-                echo "Bienvenido " . $usuario;
-                echo "Sessio de usuario:" .session_id();
-                header("Location: usuaris.html");
-            }
-        }
+    foreach ($usuaris as $usuari) {
+        $datos = explode(":",$usuari);
+        if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
+            session_name($_POST["usuario"]);
+            session_start();
 
 
-        while (!feof($archivo)) {
-            $linea = fgets($archivo);
+            // Guardar id de sesión en cookie
 
-            $datos = explode(":", $linea);
+            setcookie("id_sesion", session_id(), time() + 3600);
 
-            echo $datos[$numLinea][0];
-            echo $datos[$numLinea][1];
-            echo "<br>";
-            echo $usuario;
-            echo $contrasena;
-            echo "<br>";
+            // Guardar id de sesion en una variable
 
+            $id_sesion = session_id();
 
-            if ($datos[0] == $usuario && $datos[1] == $contrasena) {
-                echo "Usuario y contraseña correctos";
-                echo "<br>";
-                echo "Bienvenido " . $usuario;
+            // Redirigir a la página principal
+            header("Location: usuaris.php");
 
-                $_SESSION["usuario"] = $usuario;
-                $_SESSION["contrasena"] = $contrasena;
-
-                header("refresh: 3; url=usuaris.html");
-
-                break;
-            }else {
-
-                echo "<script>alert('Usuario o contraseña incorrectos')</script>";
-                //Rediriigimos a la pagina de login en 5 segundos
-
-                header("refresh:2; url=INDEX.html");
-                break;
-            }
+            break;
         }
     }
-    
-    
+
 ?>

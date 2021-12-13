@@ -29,6 +29,7 @@
     </style>
 </head>
 <body>
+    <p name="idSessio">Id de sessio: </p>
     <p>USUARI</p>
     <a href="catalegbiblio.php">Visualització llista de llibres disponibles</a>
     <a href="usuariPersonal.php">Visualització dades personal</a>

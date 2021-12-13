@@ -1,67 +1,34 @@
 <?php
 
    // Abrir archivo login.txt
-    $filename='Bibliotecaris.txt';
-    $archivo = fopen($filename, "rb");
-    
 
-    // comprobamos que el usuario y la contraseña sean correctos
+   $fitxer_usuaris="Usuarios.txt";
+   $fp=fopen($fitxer_usuaris,"r") or die ("No s'ha pogut validar l'usuari");
 
-    if (isset($_POST["biblio"], $_POST["contrasena"])) {
-        $usuario = $_POST["biblio"];
+    if ($fp) {
+        $mida_fitxer=filesize($fitxer_usuaris);
+        $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
+    }
 
-        $contrasena = $_POST["contrasena"];
-
-        // leemos el archivo y lo guardamos en un array
-
-        $lineas = explode("\n", fread($archivo, filesize("Bibliotecaris.txt"))); // leemos el archivo y lo guardamos en un array
-
-        foreach ($lineas as $linea) {
-            list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
-
-            if ($usuariotxt == $usuario && $contrasenatxt == $contrasena) {
-                session_start();
-                $_SESSION["biblio"] = $usuario;
-                $_SESSION["contrasena"] = $contrasena;
-                echo "Bienvenido " . $usuario;
-                header("Location: bibliotecaris.html");
-            }
-        
-        }
+    foreach ($usuaris as $usuari) {
+        $datos = explode(":",$usuari);
+        if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
+            session_name($_POST["usuario"]);
+            session_start();
 
 
-        while (!feof($archivo)) {
-            $linea = fgets($archivo);
+            // Guardar id de sesión en cookie
 
-            $datos = explode(":", $linea);
+            setcookie("id_sesion", session_id(), time() + 3600);
 
-            echo $datos[$numLinea][0];
-            echo $datos[$numLinea][1];
-            echo "<br>";
-            echo $usuario;
-            echo $contrasena;
-            echo "<br>";
+            // Guardar id de sesion en una variable
 
+            $id_sesion = session_id();
 
-            if ($datos[0] == $usuario && $datos[1] == $contrasena) {
-                echo "Usuario y contraseña correctos";
-                echo "<br>";
-                echo "Bienvenido " . $usuario;
+            // Redirigir a la página principal
+            header("Location: usuaris.php");
 
-                $_SESSION["biblio"] = $usuario;
-                $_SESSION["contrasena"] = $contrasena;
-
-                header("refresh: 3; url=bibliotecaris.html");
-
-                break;
-            }else {
-
-                echo "<script>alert('Usuario o contraseña incorrectos')</script>";
-                //Rediriigimos a la pagina de login en 5 segundos
-
-                header("refresh:2; url=index.html");
-                break;
-            }
+            break;
         }
     }
     
