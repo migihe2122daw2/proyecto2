@@ -28,6 +28,7 @@
     </style>
 </head>
 <body>
+    <p name="idSessio">Id de sessio: </p>
     <p>BIBLIOTECARI</p>
     <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="">Creació, visualització i eliminació d'usuaris</a>

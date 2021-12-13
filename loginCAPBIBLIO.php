@@ -26,7 +26,7 @@
             $id_sesion = session_id();
 
             // Redirigir a la página principal
-            header("Location: capbiblio.html");
+            header("Location: capbiblio.php");
 
             break;
         }

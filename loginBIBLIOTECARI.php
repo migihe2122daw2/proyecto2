@@ -26,7 +26,7 @@
             $id_sesion = session_id();
 
             // Redirigir a la página principal
-            header("Location: bibliotecaris.html");
+            header("Location: bibliotecaris.php");
 
             break;
         }
