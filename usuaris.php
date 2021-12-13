@@ -1,5 +1,14 @@
 <?php
-    session_start();
+    include './loginUSUARI.php';
+
+    // Generar un nuevo id de sesión
+
+    session_id();
+
+    // mostrar datos del usuario
+
+    echo "<p>Nom: " . $_SESSION['usuario'] . "</p>";
+    echo "<p>Cognoms: " . $_SESSION['contrasena'] . "</p>";
 ?>
 
 <!DOCTYPE html>

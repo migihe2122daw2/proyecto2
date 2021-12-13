@@ -1,4 +1,8 @@
 <?php
+include './loginUSUARI.php';
+    // Mostrar el id de sessió
+
+    echo "Identificador de sessió: ".session_id()."<br>";
 
     // Incluir la clase LLibres
 

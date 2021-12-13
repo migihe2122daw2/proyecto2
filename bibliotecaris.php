@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +32,7 @@
     </style>
 </head>
 <body>
-    <p name="idSessio">Id de sessio: </p>
+    <p name="idSessio">Id de sessio: <?php echo session_id() ?></p>
     <p>BIBLIOTECARI</p>
     <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="">Creació, visualització i eliminació d'usuaris</a>
