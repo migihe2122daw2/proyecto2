@@ -2,7 +2,7 @@
 
    // Abrir archivo login.txt
 
-   $fitxer_usuaris="Usuarios.txt";
+   $fitxer_usuaris="Bibliotecaris.txt";
    $fp=fopen($fitxer_usuaris,"r") or die ("No s'ha pogut validar l'usuari");
 
     if ($fp) {
@@ -12,8 +12,8 @@
 
     foreach ($usuaris as $usuari) {
         $datos = explode(":",$usuari);
-        if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
-            session_name($_POST["usuario"]);
+        if (($_POST['biblio'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
+            session_name($_POST["biblio"]);
             session_start();
 
 
@@ -26,7 +26,7 @@
             $id_sesion = session_id();
 
             // Redirigir a la página principal
-            header("Location: usuaris.php");
+            header("Location: bibliotecaris.html");
 
             break;
         }
