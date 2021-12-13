@@ -19,8 +19,6 @@
     foreach ($usuaris as $usuari) {
         $datos = explode(":",$usuari);
 
-       var_dump($datos);
-
 
         if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
             

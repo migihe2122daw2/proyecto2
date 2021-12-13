@@ -1,4 +1,3 @@
 usuario:contrasena
-a:a
-b:b
-c:c
+UsuariAntonio:contrasenaAntonio
+UsuariSol:contrasenaSol

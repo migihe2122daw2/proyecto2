@@ -2,8 +2,6 @@
 include './loginUSUARI.php';
     // Mostrar el id de sessió
 
-    echo "Identificador de sessió: ".session_id()."<br>";
-
     // Incluir la clase LLibres
 
     require_once("claseLibro.php");
@@ -61,12 +59,43 @@ include './loginUSUARI.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+         /* Poner div session arriba a la derecha con un recuadro */
+
+         #session {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            width: 300px;
+            height: 80px;
+            background-color: #f1f1f1;
+            border: 1px solid #d3d3d3;
+            padding: 10px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        /* Posicionar el botón de cerrar sesión en el centro del recuadro */
+
+        #Cerrar {
+            position: absolute;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
 </head>
 <body>
+<div id="session">
+        <p name="idSessio">Id de sessio: <?php echo session_id() ?></p>
+        <!-- Boton para cerrar sesion -->
+        <form id="Cerrar" action="" method="post">
+            <input style="font-size: 13px; " type="submit" name="cerrar" value="Cerrar sesión">
+        </form>
+    </div>
     <form action="catalegbiblio.php">
         <input type="text" name="mostrar">Tria l'opcio
         <input type="submit" value="Mostrar">
     </form>
-    <a href="bibliotecaris.html">Torna</a>
 </body>
 </html>

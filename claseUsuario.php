@@ -20,18 +20,18 @@
 
         // Constructor
 
-        public function __construct($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN){
-            $this->nombre = $nombre;
-            $this->apellido1 = $apellido1;
-            $this->apellido2 = $apellido2;
-            $this->residencia = $residencia;
-            $this->email = $email;
-            $this->telefono = $telefono;
-            $this->idPersonal = $idPersonal;
-            $this->contrasena = $contrasena;
-            $this->prestado = $prestado;
-            $this->fechaPrestamo = $fechaPrestamo;
-            $this->ISBN = $ISBN;
+        public function __construct(){
+            $this->nombre = "";
+            $this->apellido1 = "";
+            $this->apellido2 = "";
+            $this->residencia = "";
+            $this->email = "";
+            $this->telefono = "";
+            $this->idPersonal = "";
+            $this->contrasena = "";
+            $this->prestado = "";
+            $this->fechaPrestamo = "";
+            $this->ISBN = "";
         }
 
         // Métodos
@@ -125,7 +125,17 @@
         }
 
         public function toString(){
-            return "Nombre: " . $this->nombre . " Apellido1: " . $this->apellido1 . " Apellido2: " . $this->apellido2 . " Residencia: " . $this->residencia . " Email: " . $this->email . " Telefono: " . $this->telefono . " IdPersonal: " . $this->idPersonal . " Contraseña: " . $this->contrasena . " Prestado: " . $this->prestado . " FechaPrestamo: " . $this->fechaPrestamo . " ISBN: " . $this->ISBN;
+            return "Nombre: " . $this->nombre . "<br>" .
+                    "Apellido1: " . $this->apellido1 . "<br>" .
+                    "Apellido2: " . $this->apellido2 . "<br>" .
+                    "Residencia: " . $this->residencia . "<br>" .
+                    "Email: " . $this->email . "<br>" .
+                    "Telefono: " . $this->telefono . "<br>" .
+                    "IdPersonal: " . $this->idPersonal . "<br>" .
+                    "Contrasena: " . $this->contrasena . "<br>" .
+                    "Prestado: " . $this->prestado . "<br>" .
+                    "FechaPrestamo: " . $this->fechaPrestamo . "<br>" .
+                    "ISBN: " . $this->ISBN . "<br>";
         }
 /*
         // Método para crear un usuario y meterlo en Ususarios.txt
@@ -143,20 +153,53 @@
             fclose($archivo);
         }
 */
-        // Método para leer un usuario por su idPersonal´
+        // Método sumar 2 numeros
 
-        public static function leerUsuario($idPersonal){
-            $archivo = fopen("Usuarios.txt", "r");
-            while(!feof($archivo)){
-                $linea = fgets($archivo);
-                $datos = explode("-", $linea);
-                if($datos[6] == $idPersonal){
-                    $usuario = new Usuario($datos[0], $datos[1], $datos[2], $datos[3], $datos[4], $datos[5], $datos[6], $datos[7], $datos[8], $datos[9], $datos[10]);
-                    fclose($archivo);
-                    return $usuario;
+        public static function sumar($num1, $num2){
+            return $num1 + $num2;
+        }
+
+        // Método para mostrar el usuario segun su usuario y contrasena
+
+        public static function mostrar($usuario, $contrasena){
+
+            // Abrir el archivo en modo lectura
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris,"r") or die ("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer=filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
+            }
+
+            foreach ($usuaris as $usuari) {
+                $datos = explode(":", $usuari);
+
+                if ($datos[6] ?? "" == $usuario && $datos[7] == $contrasena) {
+                    $usuari = new Usuario();
+
+                    // set de los datos del usuario
+
+                    $usuari->setNombre($datos[0]);
+                    $usuari->setApellido1($datos[1]);
+                    $usuari->setApellido2($datos[2]);
+                    $usuari->setResidencia($datos[3]);
+                    $usuari->setEmail($datos[4]);
+                    $usuari->setTelefono($datos[5]);
+                    $usuari->setIdPersonal($datos[6]);
+                    $usuari->setContrasena($datos[7]);
+                    $usuari->setPrestado($datos[8]);
+                    $usuari->setFechaPrestamo($datos[9]);
+                    $usuari->setISBN($datos[10]);
+
+                    // Pasar a string el usuario
+                    $usuari = $usuari->toString();
+                    // return $usuari;
+                    return $usuari;
                 }
             }
-            fclose($archivo);
+            fclose($fp);
         }
 
     }

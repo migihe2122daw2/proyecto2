@@ -1,6 +1,22 @@
 <?php
-include("claseUsuario.php");
+    include("claseUsuario.php");
+    include("loginUSUARI.php");
     session_start();
+
+    // Mostrar todos los datos del usuario al carregar la página
+
+    if (isset($_SESSION['usuario'])) {
+        $usuario = $_SESSION['usuario'];
+        $contrasena = $_SESSION['contrasena'];
+        $usuario = new Usuario();
+        //$usuario->mostrar($usuario, $contrasena);
+
+        $resultado = $usuario->mostrar($usuario, $contrasena);
+        echo $resultado;
+    }
+
+
+
 
 ?>
 
