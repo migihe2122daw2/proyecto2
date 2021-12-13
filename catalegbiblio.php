@@ -63,5 +63,6 @@
         <input type="text" name="mostrar">Tria l'opcio
         <input type="submit" value="Mostrar">
     </form>
+    <a href="bibliotecaris.html">Torna</a>
 </body>
 </html>

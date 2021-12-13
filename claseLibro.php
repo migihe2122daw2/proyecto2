@@ -89,8 +89,9 @@
                 echo "<p>Prestec: " . $llibre[3] . "</p>";
                 echo "<p>Inici prestec: " . $llibre[4] . "</p>";
                 echo "<p>Codi usuari: " . $llibre[5] . "</p>";
+                echo "<br>";
             }
-
+            fclose($arxiu);
         }
 
         // Metode per crear un nou llibre al fitxer de text

@@ -14,7 +14,7 @@
 
         // leemos el archivo y lo guardamos en un array
 
-        $lineas = file($filename);
+        $lineas = explode("\n", fread($archivo, filesize("Bibliotecaris.txt"))); // leemos el archivo y lo guardamos en un array
 
         foreach ($lineas as $linea) {
             list($usuariotxt, $contrasenatxt) = explode(":", $linea); // separamos el usuario y la contraseña
