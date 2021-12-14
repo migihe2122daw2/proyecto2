@@ -14,8 +14,6 @@
 
     // Asignar variables de sesión
 
-    
-
     foreach ($usuaris as $usuari) {
         $datos = explode(":",$usuari);
 

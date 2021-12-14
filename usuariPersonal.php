@@ -6,12 +6,11 @@
     // Mostrar todos los datos del usuario al carregar la página
 
     if (isset($_SESSION['usuario'])) {
-        $usuario = $_SESSION['usuario'];
+        $usuarioS = $_SESSION['usuario'];
         $contrasena = $_SESSION['contrasena'];
         $usuario = new Usuario();
-        //$usuario->mostrar($usuario, $contrasena);
 
-        $resultado = $usuario->mostrar($usuario, $contrasena);
+        $resultado = $usuario->mostrar($usuarioS, $contrasena);
         echo $resultado;
     }
 
