@@ -2,9 +2,11 @@
 include './loginUSUARI.php';
     // Mostrar el id de sessió
 
-    // Incluir la clase LLibres
+    // Incluir la clase LLibres y demas
 
     require_once("claseLibro.php");
+    require_once("claseBibliotecari.php");
+    require_once("claseCapBiblio.php");
 
     // Leer los datos del formulario
 
@@ -33,14 +35,10 @@ include './loginUSUARI.php';
                 break;
             case "CREAR":
 
-                // Crear formulario para crear un libro
-
-                $libros = new Libro();
-
                 // Mostrar el formulario
 
                 echo "<p>Introdueix el titol del llibre: </p>";
-                echo "<form action='claseLibro.php' method='post'>";
+                echo "<form action='catalegbiblio.php?mostrar=crear' method='POST'>";
                 echo "<input type='text' name='titol'><br>";
 
                 echo "<p>Introdueix el autor del llibre: </p>";
@@ -61,14 +59,39 @@ include './loginUSUARI.php';
                 echo "<input type='submit' value='Crear llibre'>";
                 echo "</form>";
 
-                $titol = $_POST["titol"];
-                $autor = $_POST["autor"];
-                $ISBN = $_POST["ISBN"];
-                $prestec = $_POST["prestec"];
-                $inicprestec = $_POST["inicprestec"];
-                $codiusuari = $_POST["codiusuari"];
+                $titolA = $_POST["titol"];
+                $autorA = $_POST["autor"];
+                $ISBNA = $_POST["ISBN"];
+                $prestecA = $_POST["prestec"];
+                $inicprestecA = $_POST["inicprestec"];
+                $codiusuariA = $_POST["codiusuari"];
 
-                echo $titol, $autor, $ISBN;
+                // Ir a la clase Bibliotecaris o clase CapBiblio dependiendo de si es bibliotecari o CapBiblio
+
+                if ($_SESSION["tipo"] == "biblio") {
+
+                    // Crear un objeto de la clase Bibliotecari
+
+                    $bibliotecari = new Bibliotecari();
+
+                    // Crear el llibre
+
+                    $bibliotecari->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+
+                } else {
+
+                    // Crear un objeto de la clase CapBiblio
+
+                    $capBiblio = new CapBiblio();
+
+                    // Crear el llibre
+
+                    $capBiblio->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+
+                }
+
+                // Refrescar la página
+
 
                 break;
             

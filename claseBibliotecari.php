@@ -68,7 +68,27 @@
             $this->bibliotecariCap = $bibliotecariCap;
         }
 
-        // Método para crear un libro
+        // Método para crear un libro a partir de los datos de catalegbiblio.php
+
+        public function crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
+
+            // utilizar objeto de la clase Bibiliotecari
+
+            $bibliotecari = new Bibliotecari();
+
+            // Utilizar setters de la clase Libro
+
+            $bibliotecari->setTitol($titolA);
+            $bibliotecari->setAutor($autorA);
+            $bibliotecari->setISBN($ISBNA);
+            $bibliotecari->setPrestec($prestecA);
+            $bibliotecari->setInicprestec($inicprestecA);
+            $bibliotecari->setCodiusuari($codiusuariA);
+
+            echo "<br>";
+            echo "El llibre " . $bibliotecari->getTitol() . " ha estat creat correctament.";
+
+        }
 
     }
 
