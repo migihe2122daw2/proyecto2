@@ -61,6 +61,15 @@ include './loginUSUARI.php';
                 echo "<input type='submit' value='Crear llibre'>";
                 echo "</form>";
 
+                $titol = $_POST["titol"];
+                $autor = $_POST["autor"];
+                $ISBN = $_POST["ISBN"];
+                $prestec = $_POST["prestec"];
+                $inicprestec = $_POST["inicprestec"];
+                $codiusuari = $_POST["codiusuari"];
+
+                echo $titol, $autor, $ISBN;
+
                 break;
             
             default:
