@@ -33,14 +33,34 @@ include './loginUSUARI.php';
                 break;
             case "CREAR":
 
-                // Crear un objeto de la clase LLibres
-    
+                // Crear formulario para crear un libro
+
                 $libros = new Libro();
-    
-                // Mostrar los libros
-    
-                $libros->crearLlibre();
-    
+
+                // Mostrar el formulario
+
+                echo "<p>Introdueix el titol del llibre: </p>";
+                echo "<form action='claseLibro.php' method='post'>";
+                echo "<input type='text' name='titol'><br>";
+
+                echo "<p>Introdueix el autor del llibre: </p>";
+                echo "<input type='text' name='autor'><br>";
+                
+                echo "<p>Introdueix el ISBN del llibre: </p>";
+                echo "<input type='text' name='ISBN'><br>";
+
+                echo "<p>Introdueix si el llibre es prestarà: </p>";
+                echo "<input type='checkbox' name='prestec'><br>";
+
+                echo "<p>Introdueix la data d'inici del prestec: </p>";
+                echo "<input type='date' name='inicprestec'><br>";
+
+                echo "<p>Introdueix el codi de l'usuari: </p>";
+                echo "<input type='text' name='codiusuari'><br>";
+
+                echo "<input type='submit' value='Crear llibre'>";
+                echo "</form>";
+
                 break;
             
             default:

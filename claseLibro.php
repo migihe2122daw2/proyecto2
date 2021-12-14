@@ -19,6 +19,7 @@
             $this->codiusuari = "";
         }
 
+
         // Getters
 
         public function getTitol(){
@@ -90,8 +91,15 @@
                 echo "<p>Inici prestec: " . $llibre[4] . "</p>";
                 echo "<p>Codi usuari: " . $llibre[5] . "</p>";
                 echo "<br>";
+
+                // Comprovar si hay libro
+
+                if ($llibre[0] == "" && $llibre[1] == "" && $llibre[2] == "" && $llibre[3] == "" && $llibre[4] == "" && $llibre[5] == "") {
+                    fclose($arxiu);
+                    break;
+                }
             }
-            fclose($arxiu);
+            
         }
 
         // Metode per crear un nou llibre al fitxer de text
