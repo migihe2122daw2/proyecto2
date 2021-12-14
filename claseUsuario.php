@@ -173,7 +173,42 @@
                 $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
             }
 
-            foreach ($usuaris as $usuari) {
+            // Buscar el usuario con el usuario y contrasena que se le pasa por parametro
+
+            $usuari_validat = false;
+            $contador = 0;
+
+            while (($usuari_validat == false) && ($contador < count($usuaris))) {
+                $usuari = explode(":", $usuaris[$contador]);
+                if (($usuari[6] == $usuario) && ($usuari[7] == $contrasena)) {
+                    $usuari_validat = true;
+                }
+                $contador++;
+            }
+
+            // Si el usuario es valido, mostrar los datos del usuario
+
+            if ($usuari_validat == true) {
+                $usuari = explode(":", $usuaris[$contador - 1]);
+                echo "Nombre: " . $usuari[2] . "<br>" .
+                    "Apellido1: " . $usuari[3] . "<br>" .
+                    "Apellido2: " . $usuari[4] . "<br>" .
+                    "Residencia: " . $usuari[5] . "<br>" .
+                    "Email: " . $usuari[6] . "<br>" .
+                    "Telefono: " . $usuari[7] . "<br>" .
+                    "IdPersonal: " . $usuari[8] . "<br>" .
+                    "Contrasena: " . $usuari[9] . "<br>" .
+                    "Prestado: " . $usuari[10] . "<br>" .
+                    "FechaPrestamo: " . $usuari[11] . "<br>" .
+                    "ISBN: " . $usuari[12] . "<br>";
+            } else {
+                echo "Usuari o contrasena incorrectes";
+            }
+
+
+            
+
+            /*foreach ($usuaris as $usuari) {
                 $datos = explode(":", $usuari);
 
                 if ($datos[6] ?? "" == $usuario && $datos[7] == $contrasena) {
@@ -198,7 +233,7 @@
                     // return $usuari;
                     return $usuari;
                 }
-            }
+            }*/
             fclose($fp);
         }
 
