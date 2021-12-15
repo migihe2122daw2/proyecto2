@@ -2,20 +2,20 @@
 
    // Abrir archivo login.txt
 
-   $fitxer_usuaris="Capbiblio.txt";
-   $fp=fopen($fitxer_usuaris,"r") or die ("No s'ha pogut validar l'usuari");
+   $fitxer_capbiblio="Capbiblio.txt";
+   $fp=fopen($fitxer_capbiblio,"r") or die ("No s'ha pogut validar l'usuari");
 
     if ($fp) {
-        $mida_fitxer=filesize($fitxer_usuaris);
-        $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
+        $mida_fitxer=filesize($fitxer_capbiblio);
+        $capbiblio = explode(PHP_EOL, fread($fp,$mida_fitxer));
     }
 
     session_start();
 
     // Asignar variables de sesión
 
-    foreach ($usuaris as $usuari) {
-        $datos = explode(":",$usuari);
+    foreach ($capbiblio as $capbibliotecari) {
+        $datos = explode(":",$capbibliotecari);
 
 
         if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])){
@@ -23,7 +23,7 @@
             $_SESSION['usuario'] = $_POST['usuario'];
             $_SESSION['contrasena'] = $_POST['contrasena'];
             //datos[2] tolowercase
-            $_SESSION['tipo'] = strtolower($datos[2]);
+            $_SESSION['tipo'] = "capbiblio";
             session_regenerate_id();
 
             // Redirigir a la página principal

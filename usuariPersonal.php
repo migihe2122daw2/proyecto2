@@ -1,6 +1,11 @@
 <?php
     include("claseUsuario.php");
     include("loginUSUARI.php");
+
+    include("claseCapBibliotecari.php");
+    include("claseBibliotecari.php");
+
+
     session_start();
 
     // Mostrar todos los datos del usuario al carregar la página

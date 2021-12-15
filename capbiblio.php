@@ -1,6 +1,6 @@
 <?php
 
-    include './loginCAPBIBLIO.php';
+    include("loginCAPBIBLIO.php");    
 
     session_start();
 
@@ -39,7 +39,6 @@
             }
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +87,7 @@
     </style>
 </head>
 <body>
-    <div id="session">
+<div id="session">
         <p name="idSessio">Id de sessio: <?php echo session_id() ?></p>
         <!-- Boton para cerrar sesion -->
         <form id="Cerrar" action="" method="post">
@@ -97,7 +96,7 @@
     </div>
     <p>BIBLIOTECARI</p>
     <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
-    <a href="">Creació, visualització i eliminació d'usuaris</a>
-    <a href="">Creació, visualització i eliminació dades bibliotecaris</a>
+    <a href="adminUsuarios.php">Creació, visualització i eliminació d'usuaris</a>
+    <a href="usuariPersonal.php">Visualització dades personals</a>
 </body>
 </html>

@@ -137,22 +137,6 @@
                     "FechaPrestamo: " . $this->fechaPrestamo . "<br>" .
                     "ISBN: " . $this->ISBN . "<br>";
         }
-/*
-        // Método para crear un usuario y meterlo en Ususarios.txt
-
-        public static function crearUsuario($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN){
-            $usuario = new Usuario($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN);
-            $usuario->guardarUsuario();
-        }
-
-        // Método para guardar un usuario en Ususarios.txt
-
-        public function guardarUsuario(){
-            $archivo = fopen("Usuarios.txt", "a");
-            fwrite($archivo, $this->toString() . PHP_EOL);
-            fclose($archivo);
-        }
-*/
 
         // Método para mostrar el usuario segun su usuario y contrasena
 

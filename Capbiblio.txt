@@ -1,1 +1,1 @@
-capb:contrasenaCap:CapBiblio
+capb:contrasenaCap

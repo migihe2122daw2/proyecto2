@@ -2,7 +2,10 @@
 
     // Crear clase bibliotecari que herede de claseUsuario
 
-    class Bibliotecari extends Usuari implements claseLibro
+    include_once "claseUsuario.php";
+    /*include_once "interficieLibro.php";*/
+
+    class Bibliotecari extends Usuario
     {
 
         // Atributos
@@ -70,25 +73,30 @@
 
         // Método para crear un libro a partir de los datos de catalegbiblio.php
 
-        public function crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
+        /*public function crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
 
             // utilizar objeto de la clase Bibiliotecari
 
             $bibliotecari = new Bibliotecari();
 
-            // Utilizar setters de la clase Libro
+            // Utilizar el métodos abstractos de la interficieLibro
 
             $bibliotecari->setTitol($titolA);
             $bibliotecari->setAutor($autorA);
             $bibliotecari->setISBN($ISBNA);
             $bibliotecari->setPrestec($prestecA);
-            $bibliotecari->setInicprestec($inicprestecA);
-            $bibliotecari->setCodiusuari($codiusuariA);
+            $bibliotecari->setIniciprestec($inicprestecA);
+            $bibliotecari->setCodiUsuari($codiusuariA);
 
             echo "<br>";
             echo "El llibre " . $bibliotecari->getTitol() . " ha estat creat correctament.";
 
-        }
+            // Guardar el libro en el txt
+
+            $fp = fopen("Llibres.txt", "a");
+            fwrite($fp, $bibliotecari->getTitol() . ";" . $bibliotecari->getAutor() . ";" . $bibliotecari->getISBN() . ";" . $bibliotecari->getPrestec() . ";" . $bibliotecari->getIniciprestec() . ";" . $bibliotecari->getCodiUsuari() . "\n");
+            
+        }*/
 
     }
 

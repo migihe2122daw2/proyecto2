@@ -1,12 +1,12 @@
 <?php
-include './loginUSUARI.php';
+    include './loginCAPBIBLIO.php';
+    include './loginBIBLIOTECARI.php';
     // Mostrar el id de sessió
 
     // Incluir la clase LLibres y demas
 
-    require_once("claseLibro.php");
-    require_once("claseBibliotecari.php");
-    require_once("claseCapBiblio.php");
+    include './interficieLibro.php';
+    include './claseCapBiblio.php';
 
     // Leer los datos del formulario
 
@@ -82,7 +82,7 @@ include './loginUSUARI.php';
 
                     // Crear un objeto de la clase CapBiblio
 
-                    $capBiblio = new CapBiblio();
+                    $capBiblio = new CapBibliotecari();
 
                     // Crear el llibre
 

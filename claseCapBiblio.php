@@ -2,7 +2,10 @@
 
     // Crear clase CapBibliotecari que herede de claseBibliotecari
 
-    class CapBibliotecari extends Bibliotecari implements claseLibro
+    include_once "claseBibliotecari.php";
+    include_once "interficieLibro.php";
+
+    class CapBibliotecari extends Bibliotecari
     {
 
         // Atributos
