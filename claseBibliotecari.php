@@ -3,9 +3,9 @@
     // Crear clase bibliotecari que herede de claseUsuario
 
     include_once "claseUsuario.php";
-    /*include_once "interficieLibro.php";*/
-
-    class Bibliotecari extends Usuario
+    include_once "claseLibro.php";
+    
+    class Bibliotecari extends Libro
     {
 
         // Atributos
@@ -71,33 +71,33 @@
             $this->bibliotecariCap = $bibliotecariCap;
         }
 
-        // Método para crear un libro a partir de los datos de catalegbiblio.php
-
-        /*public function crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
-
+        // Método para crear un llibre a partir de los datos que se pasan por parámetro desde catalogo.php
+        
+        public function crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
             // utilizar objeto de la clase Bibiliotecari
-
             $bibliotecari = new Bibliotecari();
-
+            // Utilizar setters de la clase Libro
             // Utilizar el métodos abstractos de la interficieLibro
-
             $bibliotecari->setTitol($titolA);
             $bibliotecari->setAutor($autorA);
             $bibliotecari->setISBN($ISBNA);
             $bibliotecari->setPrestec($prestecA);
             $bibliotecari->setIniciprestec($inicprestecA);
+            $bibliotecari->setCodiusuari($codiusuariA);
+            $bibliotecari->setIniciprestec($inicprestecA);
             $bibliotecari->setCodiUsuari($codiusuariA);
-
             echo "<br>";
             echo "El llibre " . $bibliotecari->getTitol() . " ha estat creat correctament.";
 
+
+            // call funct to add txt
+
+            $bibliotecari->crearLlibreBiblioteca();
+
+
+        }
             // Guardar el libro en el txt
-
-            $fp = fopen("Llibres.txt", "a");
-            fwrite($fp, $bibliotecari->getTitol() . ";" . $bibliotecari->getAutor() . ";" . $bibliotecari->getISBN() . ";" . $bibliotecari->getPrestec() . ";" . $bibliotecari->getIniciprestec() . ";" . $bibliotecari->getCodiUsuari() . "\n");
             
-        }*/
-
-    }
+        }
 
 ?>

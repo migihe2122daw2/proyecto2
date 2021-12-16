@@ -35,28 +35,18 @@
                 break;
             case "CREAR":
 
-                // Mostrar el formulario
+                // Mostrar el formulario de creación de libros de forma bonita
 
-                echo "<p>Introdueix el titol del llibre: </p>";
-                echo "<form action='catalegbiblio.php?mostrar=crear' method='POST'>";
-                echo "<input type='text' name='titol'><br>";
-
-                echo "<p>Introdueix el autor del llibre: </p>";
-                echo "<input type='text' name='autor'><br>";
-                
-                echo "<p>Introdueix el ISBN del llibre: </p>";
-                echo "<input type='text' name='ISBN'><br>";
-
-                echo "<p>Introdueix si el llibre es prestarà: </p>";
-                echo "<input type='checkbox' name='prestec'><br>";
-
-                echo "<p>Introdueix la data d'inici del prestec: </p>";
-                echo "<input type='date' name='inicprestec'><br>";
-
-                echo "<p>Introdueix el codi de l'usuari: </p>";
-                echo "<input type='text' name='codiusuari'><br>";
-
-                echo "<input type='submit' value='Crear llibre'>";
+                echo "<form action='catalegbiblio.php?mostrar=crear' method='post'>";
+                echo "<table border=1>";
+                echo "<tr><td>Título:</td><td><input type='text' name='titol'></td></tr>";
+                echo "<tr><td>Autor:</td><td><input type='text' name='autor'></td></tr>";
+                echo "<tr><td>ISBN:</td><td><input type='text' name='ISBN'></td></tr>";
+                echo "<tr><td>Prestec:</td><td><input type='checkbox' name='prestec'></td></tr>";
+                echo "<tr><td>Data inici prestec:</td><td><input type='date' name='inicprestec'></td></tr>";
+                echo "<tr><td>Codi d'usuari:</td><td><input type='text' name='codiusuari'></td></tr>";
+                echo "<td><input type='submit' name='crear' value='Crear' style='margin-left: 30; margin-right: 30;'></td>";
+                echo "</table>";
                 echo "</form>";
 
                 $titolA = $_POST["titol"];
@@ -66,30 +56,38 @@
                 $inicprestecA = $_POST["inicprestec"];
                 $codiusuariA = $_POST["codiusuari"];
 
-                // Ir a la clase Bibliotecaris o clase CapBiblio dependiendo de si es bibliotecari o CapBiblio
+                // Ir a la clase Bibliotecaris o clase CapBiblio dependiendo de si es bibliotecari o CapBiblio al enviar el formulario
 
-                if ($_SESSION["tipo"] == "biblio") {
 
-                    // Crear un objeto de la clase Bibliotecari
+                // Comprobar que el libro no se envie vacío
 
-                    $bibliotecari = new Bibliotecari();
+                if ($ISBNA != "") {
 
-                    // Crear el llibre
+                    if ($_SESSION["tipo"] == "biblio") {
 
-                    $bibliotecari->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
-
-                } else {
-
-                    // Crear un objeto de la clase CapBiblio
-
-                    $capBiblio = new CapBibliotecari();
-
-                    // Crear el llibre
-
-                    $capBiblio->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+                        // Crear un objeto de la clase Bibliotecari
+    
+                        $bibliotecari = new Bibliotecari();
+    
+                        // Crear el llibre
+    
+                        $bibliotecari->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+    
+                    } else {
+    
+                        // Crear un objeto de la clase CapBiblio
+    
+                        $capBiblio = new CapBibliotecari();
+    
+                        // Crear el llibre
+    
+                        $capBiblio->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+    
+                    }
 
                 }
 
+            
                 // Refrescar la página
 
 
