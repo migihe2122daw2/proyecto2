@@ -2,7 +2,7 @@
 
    // Abrir archivo login.txt
 
-   $fitxer_capbilbio="Usuarios.txt";
+   $fitxer_capbiblio="Usuarios.txt";
    $fp=fopen($fitxer_capbiblio,"r") or die ("No s'ha pogut validar l'usuari");
 
     if ($fp) {
@@ -25,7 +25,7 @@
             session_regenerate_id();
 
             // Redirigir a la página principal
-            header("Location: capbibliotecarios.php");
+            header("Location: usuaris.php");
 
             break;
         }

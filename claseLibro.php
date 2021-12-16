@@ -1,8 +1,8 @@
 <?php
 
-// Crear interfaz libro con los siguientes atributos: titulo, autor, ISBN, prestec, iniciprestec, codiUsuari
+// Crear clase libro con los siguientes atributos: titulo, autor, ISBN, prestec, iniciprestec, codiUsuari
 
-    interface Libro{
+    class Libro{
         
         public function getTitol();
         public function getAutor();
