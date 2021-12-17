@@ -18,6 +18,7 @@
         $datos = explode(":", $capbibliotecario);
 
         if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])) {
+
             $_SESSION['usuario'] = $_POST['usuario'];
             $_SESSION['contrasena'] = $_POST['contrasena'];
             $_SESSION['tipo'] = "usuario";
@@ -28,7 +29,10 @@
             header("Location: usuaris.php");
 
             break;
+            
         }
+
     }
 
 ?>
+

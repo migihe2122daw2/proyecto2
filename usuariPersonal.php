@@ -15,7 +15,7 @@
         $contrasena = $_SESSION['contrasena'];
         $usuario = new Usuario();
 
-        $resultado = $usuario->mostrar($usuarioS, $contrasena);
+        $resultado = $usuario->mostrarUsuario($usuarioS, $contrasena);
         echo $resultado;
     }
 

@@ -140,7 +140,7 @@
 
         // Método para mostrar el usuario segun su usuario y contrasena
 
-        public static function mostrar($usuario, $contrasena){
+        public static function mostrarUsuario($usuario, $contrasena){
 
             // Abrir el archivo en modo lectura
 

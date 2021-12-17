@@ -120,7 +120,6 @@
                 }
             }
 
-
     }
 
     // Leer los datos del formulario
@@ -246,6 +245,10 @@
                 // Refrescar la página
 
                 break;
+
+            case "MODIFICAR":
+
+
             
             default:
                 echo "No se ha seleccionado ningún libro";

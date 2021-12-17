@@ -17,6 +17,8 @@
     foreach ($biblio as $bibliotecari) {
         $datos = explode(":", $bibliotecari);
 
+        // Comprobar si el usuario y contraseña son correctos
+
         if (($_POST['usuario'] == $datos[0]) && ($_POST['contrasena'] == $datos[1])) {
             $_SESSION['usuario'] = $_POST['usuario'];
             $_SESSION['contrasena'] = $_POST['contrasena'];
@@ -27,7 +29,11 @@
             // Redirigir a la página principal
             header("Location: bibliotecaris.php");
 
-            break;
         }
+
     }
+
+
+    
+     
 ?>

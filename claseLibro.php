@@ -1,9 +1,11 @@
 <?php
 
-    class Libro{
+include_once "claseUsuario.php";
+
+    class Libro extends Usuario{
         private $titol;
         private $autor;
-        private $ISBN;
+        public $ISBN;
         private $prestec;
         private $iniciprestec;
         private $codiusuari;
@@ -152,6 +154,43 @@
             // Escriure els valors dels atributs a l'arxiu de text
 
             fwrite($fitxer, $titolC . ":" . $autorC . ":" . $ISBNC . ":" . $prestecC . ":" . $iniciprestecC . ":" . $codiusuariC);
+
+            // Metode per asignar el prestec a un usuari utilitzant el codi de l'usuari
+
+            $fitxer2 = fopen("usuariPersonal.txt", "r");
+
+            while (!feof($fitxer2)) {
+                $linea = fgets($fitxer2);
+                $usuari = explode(":", $linea);
+                if ($usuari[6] == $codiusuariC) {
+
+                    // Si el prestec es true, mostrar si esta en prestamo, si no mostrar false, la data de inici de prestec, si no mostrar un 0 i el ISBN del llibre, si no mostrar un 0
+
+                    if($prestecC == "true"){
+                        // Mostrar si esta en prestamo, si no mostrar false, la data de inici de prestec, si no mostrar un 0 i el ISBN del llibre, si no mostrar un 0
+
+                        // Cambiar el archivo de usuariPersonal.txt per a que el prestec sigui true
+
+                        while(!feof($fitxer2)){
+                            $linea = fgets($fitxer2);
+                            $usuari = explode(":", $linea);
+                            if($usuari[6] == $codiusuariC){
+                                $usuari[8] = "true";
+                                $usuari[9] = $iniciprestecC;
+                                $usuari[10] = $ISBNC;
+                            }else{
+                                $usuari[8] = "false";
+                                $usuari[9] = "0";
+                                $usuari[10] = "0";
+                            }
+                            $fitxer3 = fopen("usuariPersonal.txt", "w");
+                            fwrite($fitxer3, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $usuari[8] . ":" . $usuari[9] . ":" . $usuari[10]);
+                        }
+                    }
+
+
+                }
+            }
         }
 
         // Metodo para eliminar libros de la clase
