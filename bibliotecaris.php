@@ -6,9 +6,9 @@
 
     if (isset($_POST['cerrar'])) {
 
-        // Leer el archivo de usuarios
+        // Leer el archivo de bibliotecaris
 
-        $fitxer_usuaris = "Usuarios.txt";
+        $fitxer_usuaris = "Bibliotecaris.txt";
         $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
 
         if ($fp) {
@@ -30,9 +30,9 @@
                  // Comprobar si el usuario se ha eliminado
 
                 if (isset($_SESSION['usuario'])) {
-                    echo "<p>No s'ha pogut eliminar l'usuari</p>";
+                    echo "<p>No s'ha pogut eliminar el biblbiotecari</p>";
                 } else {
-                    echo "<p>S'ha eliminat l'usuari</p>";
+                    echo "<p>S'ha eliminat el bibliotecari</p>";
                     header("Location: INDEX.html");
                 }
                 break;

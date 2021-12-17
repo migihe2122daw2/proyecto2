@@ -77,5 +77,9 @@
         
         
                 }
+
+        public function modificarLibro(){
+            
+        }
     }
 ?>
