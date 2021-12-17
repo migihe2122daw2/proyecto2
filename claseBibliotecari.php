@@ -5,7 +5,7 @@
     include_once "claseUsuario.php";
     include_once "claseLibro.php";
     
-    class Bibliotecari extends Libro
+    class Bibliotecari extends Usuario
     {
 
         // Atributos
@@ -31,7 +31,7 @@
             $this->apellido2 = "";
             $this->residencia = "";
             $this->telefono = "";
-            $this->idBibliotecari = [8];
+            $this->idBibliotecari = "";
             $this->contrasena = "";
             $this->numSS = "";
             $this->primerDiaBibliotecari = "";
@@ -40,6 +40,22 @@
         }
 
         // Getter y setters de los ultimos 3 atributos
+
+        public function getnumSS(){
+            return $this->numSS;
+        }
+
+        public function setnumSS(){
+            return $this->numSS = $numSS;
+        }
+
+        public function getidBibliotecari(){
+            return $this->idBibliotecari;
+        }
+
+        public function setidBibliotecari(){
+            return $this->idBibliotecari = $idBibliotecari;
+        }
 
         public function getPrimerDiaBibliotecari()
         {
@@ -69,6 +85,64 @@
         public function setBibliotecariCap($bibliotecariCap)
         {
             $this->bibliotecariCap = $bibliotecariCap;
+        }
+
+        public function toString(){
+            return "Nombre: " . $this->nombre . "<br>" .
+                    "Apellido1: " . $this->apellido1 . "<br>" .
+                    "Apellido2: " . $this->apellido2 . "<br>" .
+                    "Residencia: " . $this->residencia . "<br>" .
+                    "Telefono: " . $this->telefono . "<br>" . 
+                    "ID Bibliotecari: " . $this->idBibliotecari . "<br>" . 
+                    "Contraseña: " . $this->contrasena . "<br>" . 
+                    "Num Seguretat Social: " . $this->numSS . "<br>" . 
+                    "Primer Dia Biblioteca: " . $this->getPrimerDiaBibliotecari . "<br>" . 
+                    "Salari: " . $this->salari . "<br>" . 
+                    "Cap bibliotecari: " . $this->getBibliotecariCap . "<br>";
+        }
+
+        // Método para mostrar el usuario segun su usuario y contrasena
+
+        public static function mostrar($usuario, $contrasena){
+
+            // Abrir el archivo en modo lectura
+
+            $fitxer_usuaris="biblioPersonal.txt";
+            $fp=fopen($fitxer_usuaris,"rb") or die ("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer=filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp,$mida_fitxer));
+            }
+            
+            foreach ($usuaris as $usuari) {
+                $datos = explode(":", $usuari);
+
+                if ($datos[5] == $usuario && $datos[6] == $contrasena) {
+                    $usuari = new Bibliotecari();
+
+                    // set de los datos del usuario
+
+                    $usuari->setNombre($datos[0]);
+                    $usuari->setApellido1($datos[1]);
+                    $usuari->setApellido2($datos[2]);
+                    $usuari->setResidencia($datos[3]);
+                    $usuari->setTelefono($datos[4]);
+                    $usuari->setidBibliotecari($datos[5]);
+                    $usuari->setContrasena($datos[6]);
+                    $usuari->setNumss($datos[7]);
+                    $usuari->setPrimerDiaBibliotecari($datos[8]);
+                    $usuari->setSalari($datos[9]);
+                    $usuari->setBibliotecariCap($datos[10]);
+
+                    // Pasar a string el usuario
+                    $usuari = $usuari->toString();
+                    // return 
+
+                    return $usuari;
+                }
+            }
+            fclose($fp);
         }
 
         // Método para crear un llibre a partir de los datos que se pasan por parámetro desde catalogo.php

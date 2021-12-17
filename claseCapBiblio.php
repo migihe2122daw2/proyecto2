@@ -3,11 +3,10 @@
     // Crear clase CapBibliotecari que herede de claseBibliotecari
 
     include_once "claseBibliotecari.php";
-    include_once "interficieLibro.php";
+    include_once "claseLibro.php";
 
     class CapBibliotecari extends Bibliotecari
-    {
-
+{
         // Atributos
 
         public $bibliotecariCap;
@@ -33,7 +32,7 @@
 
         // Método para crear un bibliotecario
 
-        public function crearBibliotecari()
+        /*public function crearBibliotecari()
         {
             // Leer los datos del formulario
 
@@ -50,6 +49,33 @@
             $this->bibliotecariCap = $_POST["bibliotecariCap"];
 
             // Crear un objeto de la clase LLibres
-        }
+        }*/
+
+        
+            // Método para crear un llibre a partir de los datos que se pasan por parámetro desde catalogo.php
+        
+                public function crearLlibreC($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA){
+                    // utilizar objeto de la clase Bibiliotecari
+                    $capBiblio = new CapBibliotecari();
+                    // Utilizar setters de la clase Libro
+                    // Utilizar el métodos abstractos de la interficieLibro
+                    $capBiblio->setTitol($titolA);
+                    $capBiblio->setAutor($autorA);
+                    $capBiblio->setISBN($ISBNA);
+                    $capBiblio->setPrestec($prestecA);
+                    $capBiblio->setIniciprestec($inicprestecA);
+                    $capBiblio->setCodiusuari($codiusuariA);
+                    $capBiblio->setIniciprestec($inicprestecA);
+                    $capBiblio->setCodiUsuari($codiusuariA);
+                    echo "<br>";
+                    echo "El llibre " . $capBiblio->getTitol() . " ha estat creat correctament.";
+        
+        
+                    // call funct to add txt
+        
+                    $capBiblio->crearLlibreBiblioteca();
+        
+        
+                }
     }
 ?>
