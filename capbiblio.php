@@ -8,7 +8,7 @@
 
         // Leer el archivo de usuarios
 
-        $fitxer_usuaris = "Usuarios.txt";
+        $fitxer_usuaris = "Capbiblio.txt";
         $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
 
         if ($fp) {

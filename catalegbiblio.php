@@ -5,7 +5,123 @@
 
     // Incluir la clase LLibres y demas
     
+
+    include './claseLibro.php';
     include './claseCapBiblio.php';
+
+    switch ($_SESSION["tipo"]){
+        case "bibliotecari":
+            if (isset($_POST['cerrar'])) {
+
+                // Leer el archivo de bibliotecaris
+        
+                $fitxer_usuaris = "Bibliotecaris.txt";
+                $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
+        
+                if ($fp) {
+                    $mida_fitxer = filesize($fitxer_usuaris);
+                    $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+                }
+        
+                // Buscar el usuario en el archivo
+        
+                foreach ($usuaris as $usuari) {
+                    $datos = explode(":", $usuari);
+        
+                    if (($_SESSION['usuario'] == $datos[0]) && ($_SESSION['contrasena'] == $datos[1])) {
+                        session_start();
+        
+                        session_unset();
+                        session_destroy();
+        
+                         // Comprobar si el usuario se ha eliminado
+        
+                        if (isset($_SESSION['usuario'])) {
+                            echo "<p>No s'ha pogut eliminar el biblbiotecari</p>";
+                        } else {
+                            echo "<p>S'ha eliminat el bibliotecari</p>";
+                            header("Location: INDEX.html");
+                        }
+                        break;
+                    }
+                }
+            }
+        case "capbiblio":
+            if (isset($_POST['cerrar'])) {
+
+                // Leer el archivo de usuarios
+        
+                $fitxer_usuaris = "Capbiblio.txt";
+                $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
+        
+                if ($fp) {
+                    $mida_fitxer = filesize($fitxer_usuaris);
+                    $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+                }
+        
+                // Buscar el usuario en el archivo
+        
+                foreach ($usuaris as $usuari) {
+                    $datos = explode(":", $usuari);
+        
+                    if (($_SESSION['usuario'] == $datos[0]) && ($_SESSION['contrasena'] == $datos[1])) {
+                        session_start();
+        
+                        session_unset();
+                        session_destroy();
+        
+                         // Comprobar si el usuario se ha eliminado
+        
+                        if (isset($_SESSION['usuario'])) {
+                            echo "<p>No s'ha pogut eliminar l'usuari</p>";
+                        } else {
+                            echo "<p>S'ha eliminat l'usuari</p>";
+                            header("Location: INDEX.html");
+                        }
+                        break;
+                    }
+                }
+            }
+
+        case "usuario":
+            if (isset($_POST['cerrar'])) {
+
+                // Leer el archivo de usuarios
+        
+                $fitxer_usuaris = "Usuarios.txt";
+                $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
+        
+                if ($fp) {
+                    $mida_fitxer = filesize($fitxer_usuaris);
+                    $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+                }
+        
+                // Buscar el usuario en el archivo
+        
+                foreach ($usuaris as $usuari) {
+                    $datos = explode(":", $usuari);
+        
+                    if (($_SESSION['usuario'] == $datos[0]) && ($_SESSION['contrasena'] == $datos[1])) {
+                        session_start();
+        
+                        session_unset();
+                        session_destroy();
+        
+                         // Comprobar si el usuario se ha eliminado
+        
+                        if (isset($_SESSION['usuario'])) {
+                            echo "<p>No s'ha pogut eliminar l'usuari</p>";
+                        } else {
+                            echo "<p>S'ha eliminat l'usuari</p>";
+                            header("Location: INDEX.html");
+                        }
+                        break;
+                    }
+                }
+            }
+
+
+    }
 
     // Leer los datos del formulario
 
@@ -62,7 +178,7 @@
 
                 if ($ISBNA != "") {
 
-                    if ($_SESSION["tipo"] == "biblio") {
+                    if ($_SESSION["tipo"] == "bibliotecari") {
 
                         // Crear un objeto de la clase Bibliotecari
     
@@ -88,8 +204,6 @@
 
             
                 // Refrescar la página
-
-
                 break;
 
             case "ELIMINAR":
