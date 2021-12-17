@@ -2,6 +2,10 @@
     include("loginBIBLIOTECARI.php");
     include("claseBibliotecari.php");
 
+    // Limpiar buffer de los echo anteriores
+
+    ob_end_clean();
+
     session_start();
 
     // Mostrar todos los datos del usuario al carregar la página
@@ -11,7 +15,7 @@
         $contrasena = $_SESSION['contrasena'];
         $usuario = new Bibliotecari();
 
-        $resultado = $usuario->mostrar($usuarioC, $contrasena);
+        $resultado = $usuario->mostrarBibliotecario($usuarioC, $contrasena);
         echo $resultado;
     }
 

@@ -77,5 +77,24 @@
         
         
                 }
+
+                // Metode per eliminar un llibre a partir del ISBN
+
+                public function eliminarLlibreC($ISBNA){
+                    // utilizar objeto de la clase Bibiliotecari
+                    $capBiblio = new CapBibliotecari();
+                    // Utilizar setters de la clase Libro
+                    // Utilizar el métodos abstractos de la interficieLibro
+                    $capBiblio->setISBN($ISBNA);
+                    echo "<br>";
+                    echo "El llibre " . $capBiblio->getTitol() . " ha estat eliminat correctament.";
+        
+        
+                    // call funct to del txt
+        
+                    $capBiblio->eliminarLlibreBiblioteca();
+        
+        
+                }
     }
 ?>

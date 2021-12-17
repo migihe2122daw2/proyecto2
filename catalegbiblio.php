@@ -4,8 +4,7 @@
     // Mostrar el id de sessió
 
     // Incluir la clase LLibres y demas
-
-    include './interficieLibro.php';
+    
     include './claseCapBiblio.php';
 
     // Leer los datos del formulario
@@ -81,7 +80,7 @@
     
                         // Crear el llibre
     
-                        $capBiblio->crearLlibre($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
+                        $capBiblio->crearLlibreC($titolA, $autorA, $ISBNA, $prestecA, $inicprestecA, $codiusuariA);
     
                     }
 
@@ -90,6 +89,47 @@
             
                 // Refrescar la página
 
+
+                break;
+
+            case "ELIMINAR":
+
+                // Mostrar el formulario de eliminación de libros de forma bonita
+
+                echo "<form action='catalegbiblio.php?mostrar=eliminar' method='post'>";
+                echo "<table border=1>";
+                echo "<tr><td>ISBN:</td><td><input type='text' name='ISBN'></td></tr>";
+                echo "<td><input type='submit' name='eliminar' value='Eliminar' style='margin-left: 30; margin-right: 30;'></td>";
+                echo "</table>";
+                echo "</form>";
+
+                $ISBNE = $_POST["ISBN"];
+
+                // Ir a la clase Bibliotecaris o clase CapBiblio dependiendo de si es bibliotecari o CapBiblio al enviar el formulario
+
+                if ($_SESSION["tipo"] == "biblio") {
+
+                    // Crear un objeto de la clase Bibliotecari
+    
+                    $bibliotecari = new Bibliotecari();
+    
+                    // Eliminar el llibre
+    
+                    $bibliotecari->eliminarLlibre($ISBNE);
+    
+                } else {
+    
+                    // Crear un objeto de la clase CapBiblio
+    
+                    $capBiblio = new CapBibliotecari();
+    
+                    // Eliminar el llibre
+    
+                    $capBiblio->eliminarLlibreC($ISBNE);
+    
+                }
+
+                // Refrescar la página
 
                 break;
             

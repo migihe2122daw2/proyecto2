@@ -154,6 +154,44 @@
             fwrite($fitxer, $titolC . ":" . $autorC . ":" . $ISBNC . ":" . $prestecC . ":" . $iniciprestecC . ":" . $codiusuariC);
         }
 
+        // Metodo para eliminar libros de la clase
+
+        public function eliminarLlibreBiblioteca(){
+            $fitxer = fopen("Llibres.txt", "r");
+            $fitxer2 = fopen("Llibres2.txt", "w");
+            while (!feof($fitxer)) {
+                $linea = fgets($fitxer);
+                $llibre = explode(":", $linea);
+                if ($llibre[2] != $this->getISBN()) {
+                    fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $llibre[3] . ":" . $llibre[4] . ":" . $llibre[5]);
+                }
+            }
+
+            fclose($fitxer);
+            fclose($fitxer2);
+            unlink("Llibres.txt");
+            rename("Llibres2.txt", "Llibres.txt");
+            
+            $fitxer = fopen("Llibres.txt", "a+");
+
+            // Obtenir la ultima linea del archivo
+
+            $ultimaLinea = fgets($fitxer);
+
+            // Obtenir el numero de caracteres de la ultima linea
+
+            $numeroCaracteres = strlen($ultimaLinea);
+
+            // Eliminar el \n de la ultima linea
+
+            $ultimaLinea = substr($ultimaLinea, 0, $numeroCaracteres - 1);
+        
+        }
+
+        // Metodo para quitar el \n del final de la ultima linea del archivo
+
+    
+
 
 
     }
