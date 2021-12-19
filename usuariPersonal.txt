@@ -1,4 +1,3 @@
 Antonio:Lopez:Torres:Barcelona:antonii@gmail.com:640800870:UsuariAntonio:contrasenaAntonio:false:0:0
 Sol:Garcia:Gonzalez:Madrid:solga@gmail.com:640834240:UsuariSol:contrasenaSol:false:0:0
 Pedro:Apostol:Verano:Andalucia:pedri@gmail.com:640234569:usuario:contrasena:false:0:0
-
