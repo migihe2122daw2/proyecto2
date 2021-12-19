@@ -97,7 +97,6 @@
     <p>BIBLIOTECARI</p>
     <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="adminFinal.php">Creació, visualització i eliminació d'usuaris</a>
-    <a href="biblioUsuaris.php">Creació, visualització i eliminació d'usuaris</a>
     <a href="biblioPersonal.php">Visualització dades personals</a>
 </body>
 </html>

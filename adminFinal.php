@@ -64,17 +64,17 @@
                 echo "</tr>";
                 echo "<tr>";
                 echo "<tr><br></tr>";
-                echo "<td>" . $usuari->getNombre() . "</td>"; 
-                echo "<td>" . $usuari->getApellido1() . "</td>";
-                echo "<td>" . $usuari->getApellido2() . "</td>";
-                echo "<td>" . $usuari->getResidencia() . "</td>";
-                echo "<td>" . $usuari->getEmail() . "</td>";
-                echo "<td>" . $usuari->getTelefono() . "</td>";
-                echo "<td>" . $usuari->getIdPersonal() . "</td>";
-                echo "<td>" . $usuari->getContrasena() . "</td>";
-                echo "<td>" . $usuari->getPrestado() . "</td>";
-                echo "<td>" . $usuari->getFechaPrestamo() . "</td>";
-                echo "<td>" . $usuari->getISBN() . "</td>";
+                echo "<td>" . $admin->getNombre() . "</td>"; 
+                echo "<td>" . $admin->getApellido1() . "</td>";
+                echo "<td>" . $admin->getApellido2() . "</td>";
+                echo "<td>" . $admin->getResidencia() . "</td>";
+                echo "<td>" . $admin->getEmail() . "</td>";
+                echo "<td>" . $admin->getTelefono() . "</td>";
+                echo "<td>" . $admin->getIdPersonal() . "</td>";
+                echo "<td>" . $admin->getContrasena() . "</td>";
+                echo "<td>" . $admin->getPrestado() . "</td>";
+                echo "<td>" . $admin->getFechaPrestamo() . "</td>";
+                echo "<td>" . $admin->getISBN() . "</td>";
                 echo "</tr>";
                 echo "</table>";
                 
