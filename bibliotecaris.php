@@ -30,7 +30,7 @@
                  // Comprobar si el usuario se ha eliminado
 
                 if (isset($_SESSION['usuario'])) {
-                    echo "<p>No s'ha pogut eliminar el biblbiotecari</p>";
+                    echo "<p>No s'ha pogut eliminar el bibliotecari</p>";
                 } else {
                     echo "<p>S'ha eliminat el bibliotecari</p>";
                     header("Location: INDEX.html");
@@ -97,6 +97,7 @@
     <p>BIBLIOTECARI</p>
     <a href="catalegbiblio.php">Creació, visualització i eliminació llibres del catàleg</a>
     <a href="adminFinal.php">Creació, visualització i eliminació d'usuaris</a>
+    <a href="biblioUsuaris.php">Creació, visualització i eliminació d'usuaris</a>
     <a href="biblioPersonal.php">Visualització dades personals</a>
 </body>
 </html>
