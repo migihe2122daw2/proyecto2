@@ -1,6 +1,8 @@
 <?php
 
-    include './loginBIBLIOTECARIS.php';
+
+ob_clean();
+    
 
     session_start();
 

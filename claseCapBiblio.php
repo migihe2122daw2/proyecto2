@@ -1,4 +1,5 @@
 <?php
+  ob_clean();
 
     // Crear clase CapBibliotecari que herede de claseBibliotecari
 

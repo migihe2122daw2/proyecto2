@@ -2,6 +2,7 @@
     include './loginUSUARI.php';
 
     // Generar un nuevo id de sesión
+    ob_clean();
 
     session_id();
 

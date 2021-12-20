@@ -3,7 +3,10 @@
     include './loginBIBLIOTECARI.php';
     
 
-    
+// Quitar warning de error de sintaxis
+
+    error_reporting(0);
+
 
 
 
@@ -26,6 +29,8 @@
 
         switch ($opcion) {
             case 'crear':
+
+                ob_clean();
 
                 include './claseUsuario.php';
                 

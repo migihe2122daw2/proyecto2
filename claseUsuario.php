@@ -1,5 +1,10 @@
 <?php 
 
+require_once 'vendor/autoload.php';
+use Dompdf\Dompdf;
+
+ob_clean();
+
     // Crear clase usuario
 
     class Usuario{
@@ -186,6 +191,10 @@
 
         public function visualizarUsuarios()
         {
+
+            
+            ob_clean();
+            
             // Leer el archivo de usuarios
 
             $fitxer_usuaris = "usuariPersonal.txt";
@@ -235,11 +244,16 @@
             echo "</table>";
             fclose($fp);
 
-            // boton para guardar los usuarios en un pdf
+            // Generar un pdf con composer dompdf
 
+         
 
-            require_once('vendor/autoload.php');
-            
+            $dompdf = new Dompdf();
+            $dompdf->loadHtml(ob_get_clean());
+            $dompdf->setPaper('A4', 'landscape');
+            $dompdf->render();
+            $dompdf->stream("usuarios.pdf", array("Attachment" => false));
+
 
             
 

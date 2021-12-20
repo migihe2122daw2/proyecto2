@@ -1,4 +1,6 @@
 <?php
+
+ob_clean();
     include './loginCAPBIBLIO.php';
     include './loginBIBLIOTECARI.php';
     // Mostrar el id de sessió
@@ -125,7 +127,9 @@
     // Leer los datos del formulario
 
 
+
     if ($_GET["mostrar"]) {
+
 
         // Convertir a mayúsculas
 
@@ -138,6 +142,8 @@
 
             case "MOSTRAR":
 
+                ob_clean();
+
                 // Crear un objeto de la clase LLibres
 
                 $libros = new Libro();
@@ -148,6 +154,8 @@
 
                 break;
             case "CREAR":
+
+                ob_clean();
 
                 // Mostrar el formulario de creación de libros de forma bonita
 
@@ -206,6 +214,8 @@
                 break;
 
             case "ELIMINAR":
+
+                ob_clean();
 
                 // Mostrar el formulario de eliminación de libros de forma bonita
 
@@ -301,8 +311,13 @@
         </form>
     </div>
     <form action="catalegbiblio.php">
-        <input type="text" name="mostrar">Tria l'opcio
-        <input type="submit" value="Mostrar">
+        <!-- Opciones mostrar, eliminar y crear -->
+        <select name="mostrar" style="margin-left: 30; margin-right: 30;">
+            <option value="mostrar">Mostrar</option>
+            <option value="eliminar">Eliminar</option>
+            <option value="crear">Crear</option>
+        </select>
+        <input type="submit" value="Enviar">
     </form>
 </body>
 </html>

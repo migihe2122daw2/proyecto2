@@ -4,6 +4,9 @@
 
     include_once "claseUsuario.php";
     include_once "claseLibro.php";
+
+ob_clean();
+
     
     class Bibliotecari extends Libro
     {

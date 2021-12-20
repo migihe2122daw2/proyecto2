@@ -1,5 +1,7 @@
 <?php
 
+ob_clean();
+
 include_once "claseUsuario.php";
 
     class Libro extends Usuario{
@@ -9,6 +11,7 @@ include_once "claseUsuario.php";
         private $prestec;
         private $iniciprestec;
         private $codiusuari;
+
 
         // Constructor por defecto
 

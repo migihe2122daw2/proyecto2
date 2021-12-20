@@ -1,4 +1,6 @@
 <?php
+
+ob_clean();
     include("claseUsuario.php");
     include("loginUSUARI.php");
 
