@@ -257,12 +257,18 @@ ob_clean();
             $bibliotecari->setIniciprestec($inicprestecA);
             $bibliotecari->setCodiUsuari($codiusuariA);
             echo "<br>";
-            echo "El llibre " . $bibliotecari->getTitol() . " ha estat creat correctament.";
+            echo "El llibre " . $bibliotecari->getTitol() . " ha estat creat correctament.\n";
 
 
             // call funct to add txt
 
             $bibliotecari->crearLlibreBiblioteca();
+
+            // Si prestec es true, prestar el libro al usuario con su idPersonal
+
+            if($bibliotecari->getPrestec() == true){
+                $bibliotecari->prestecLlibreBiblioteca($bibliotecari->getCodiusuari());
+            }
 
 
         }

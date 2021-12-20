@@ -149,6 +149,13 @@ include_once "claseUsuario.php";
                     ob_clean();
                     echo "No has introduit cap data de prestec";
                     header("Refresh: 3 catalegbiblio.php?mostrar=crear");
+                }else{
+
+                    // Haz un set de Prestec y de Inicprestec
+
+                    $this->setPrestec($prestecC);
+                    $this->setIniciprestec($iniciprestecC);
+
                 }
             } else {
                 $iniciprestecC = "0";
@@ -167,33 +174,35 @@ include_once "claseUsuario.php";
                 $usuari = explode(":", $linea);
                 if ($usuari[6] == $codiusuariC) {
 
-                    // Si el prestec es true, mostrar si esta en prestamo, si no mostrar false, la data de inici de prestec, si no mostrar un 0 i el ISBN del llibre, si no mostrar un 0
+                    // Modificar el prestec del usuari
 
-                    if($prestecC == "true"){
-                        // Mostrar si esta en prestamo, si no mostrar false, la data de inici de prestec, si no mostrar un 0 i el ISBN del llibre, si no mostrar un 0
+                    $usuari[8] = $prestecC;
+                    $usuari[9] = $iniciprestecC;
+                    $usuari[10] = $ISBNC;
 
-                        // Cambiar el archivo de usuariPersonal.txt per a que el prestec sigui true
+                    // Instanciar un nou objecte usuari
 
-                        while(!feof($fitxer2)){
-                            $linea = fgets($fitxer2);
-                            $usuari = explode(":", $linea);
-                            if($usuari[6] == $codiusuariC){
-                                $usuari[8] = "true";
-                                $usuari[9] = $iniciprestecC;
-                                $usuari[10] = $ISBNC;
-                            }else{
-                                $usuari[8] = "false";
-                                $usuari[9] = "0";
-                                $usuari[10] = "0";
-                            }
-                            $fitxer3 = fopen("usuariPersonal.txt", "w");
-                            fwrite($fitxer3, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $usuari[8] . ":" . $usuari[9] . ":" . $usuari[10]);
-                        }
-                    }
+                    $usuari2 = new Usuario();
 
+                    // Assignar els valors dels atributs a l'objecte usuari
 
+                    $usuari2->setPrestado($usuari[8]);
+                    $usuari2->setFechaPrestamo($usuari[9]);
+                    $usuari2->setISBN($usuari[10]);
+
+                    // Escriure els valors dels atributs a l'arxiu de text
+
+                    fwrite($fitxer2, $usuari2->getNombre() . ":" . $usuari2->getApellido1() . ":" . $usuari2->getApellido2() . ":" . $usuari2->getResidencia() . ":" . $usuari2->getEmail() . ":" . $usuari2->getTelefono() . ":" . $usuari2->getIdPersonal() . ":" . $usuari2->getContrasena() . ":" . $usuari2->getPrestado() . ":" . $usuari2->getFechaPrestamo() . ":" . $usuari2->getISBN());
+
+                    // Mostrar un missatge de confirmacio
+
+                    ob_clean();
+                    echo "Llibre creat correctament";
+                    header("Refresh: 3 catalegbiblio.php");
+                                       
                 }
             }
+
         }
 
         // Metodo para eliminar libros de la clase
@@ -230,7 +239,139 @@ include_once "claseUsuario.php";
         
         }
 
-        // Metodo para quitar el \n del final de la ultima linea del archivo
+        // Metodo prestec llibre
+
+        public function prestecLlibreBiblioteca($codiusuariB){
+
+            // Comparar el codi de l'usuari que esta intentant prestar el llibre amb els ususaris
+
+            $fitxer = fopen("usuariPersonal.txt", "r");
+            $fitxer2 = fopen("usuariPersonal2.txt", "w");
+
+            while (!feof($fitxer)) {
+                $linea = fgets($fitxer);
+                $usuari = explode(":", $linea);
+                if ($usuari[6] == $codiusuariB) {
+
+                    // Si hay una fecha de prestamo, pero prestamo es caulquier cosa que no sea true, mostrar un missatge de error
+
+                    if ($usuari[8] == "false") {
+                        ob_clean();
+                        
+                        // Cambiar las variables de prestec y inicprestec del usuario
+
+                        $usuario2 = new Usuario();
+
+                        $usuario2->setPrestado($this->getPrestec());
+                        $usuario2->setFechaPrestamo($this->getIniciprestec());
+                        $usuario2->setISBN($this->getISBN());
+
+                        // Escriure els valors dels atributs a l'arxiu de text
+
+                        $usuario2->setNombre($usuari[0]);
+                        $usuario2->setApellido1($usuari[1]);
+                        $usuario2->setApellido2($usuari[2]);
+                        $usuario2->setResidencia($usuari[3]);
+                        $usuario2->setEmail($usuari[4]);
+                        $usuario2->setTelefono($usuari[5]);
+                        $usuario2->setIdPersonal($usuari[6]);
+                        $usuario2->setContrasena($usuari[7]);
+
+             
+                        fwrite($fitxer2, $usuario2->getNombre() . ":" . $usuario2->getApellido1() . ":" . $usuario2->getApellido2() . ":" . $usuario2->getResidencia() . ":" . $usuario2->getEmail() . ":" . $usuario2->getTelefono() . ":" . $usuario2->getIdPersonal() . ":" . $usuario2->getContrasena() . ":" . $usuario2->getPrestado() . ":" . $usuario2->getFechaPrestamo() . ":" . $usuario2->getISBN() . "\n");
+                    } else {
+                        echo "Prestec incorrecte";
+                        // Eliminar fitxer temporal
+                        unlink("usuariPersonal2.txt");
+                        header("Refresh: 3 catalegbiblio.php");
+                    }
+                }
+
+                // Reescribir los demas usuarios
+
+                else {
+                    fwrite($fitxer2, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $usuari[8] . ":" . $usuari[9] . ":" . $usuari[10]);
+                }
+            }
+
+            fclose($fitxer);
+            fclose($fitxer2);
+
+            unlink("usuariPersonal.txt");
+            rename("usuariPersonal2.txt", "usuariPersonal.txt");
+        }
+
+        // Metodo para modificar libros de la clase
+
+        public function modificarLlibreBiblioteca($isbn, $prestado, $inicprestec, $codiusuari){
+            $fitxer = fopen("Llibres.txt", "r");
+            $fitxer2 = fopen("Llibres2.txt", "w");
+            
+            // CAmbia el estado de prestamo del libro y usuario asociado al libro
+
+            // Buscar el libro con el ISBN que se quiere modificar 
+
+            while (!feof($fitxer)) {
+                $linea = fgets($fitxer);
+                $llibre = explode(":", $linea);
+                if ($llibre[2] == $isbn) {
+
+                    // Cambiar el estado del checkbox a true o false
+
+                    if($prestado == "on"){
+                        $prestado = "true";
+                    } else {
+                        $prestado = "false";
+                    }
+
+
+                    // Si prestamo es false y inicprestec es vacio, asinganrles un 0
+
+                    if ($prestado == "false" && $inicprestec == "") {
+                        $inicprestec = "0";
+                        $codiusuari = "0";
+                        $isbn = "0";
+                    }
+
+
+                    fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $prestado . ":" . $inicprestec . ":" . "$codiusuari");
+                } else {
+                    fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $llibre[3] . ":" . $llibre[4] . ":" . $llibre[5]);    
+                }
+            }
+
+            fclose($fitxer);
+            fclose($fitxer2);
+
+            unlink("Llibres.txt");
+            rename("Llibres2.txt", "Llibres.txt");
+
+            // Modificar el estado del usuario
+
+            $fitxer = fopen("usuariPersonal.txt", "r");
+            $fitxer2 = fopen("usuariPersonal2.txt", "w");
+
+            while (!feof($fitxer)) {
+                $linea = fgets($fitxer);
+                $usuari = explode(":", $linea);
+                if ($usuari[6] == $codiusuari) {
+                    if($prestado == "on"){
+                        $prestado = "true";
+                    } else {
+                        $prestado = "false";
+                    }
+                    if ($prestado == "false" && $inicprestec == "") {
+                        $inicprestec = "0";
+                        $codiusuari = "0";
+                        $isbn = "0";
+                    }
+                    fwrite($fitxer2, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $prestado . ":" . $inicprestec . ":" . $isbn);
+                } else {
+                    fwrite($fitxer2, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $usuari[8] . ":" . $usuari[9] . ":" . $usuari[10]);
+                }
+            }
+
+        }
 
     
 

@@ -258,6 +258,38 @@ ob_clean();
 
             case "MODIFICAR":
 
+                // Modificar libros usando el isbn
+
+
+                // Mostrar el formulario de modificación de libros de forma bonita
+
+                echo "<form action='catalegbiblio.php?mostrar=modificar' method='post'>";
+                echo "<table border=1>";
+                echo "<tr><td>ISBN:</td><td><input type='text' name='ISBN'></td></tr>";
+                echo "<tr><td>Prestamo:</td><td><input type='checkbox' name='prestamo'></td></tr>";
+                echo "<tr><td>Inicio prestamo:</td><td><input type='date' name='inicioprestamo'></td></tr>";
+                echo "<tr><td>Codi usuari:</td><td><input type='text' name='codiusuari'></td></tr>";
+                echo "<td><input type='submit' name='modificar' value='Modificar' style='margin-left: 30; margin-right: 30;'></td>";
+                echo "</table>";
+                echo "</form>";
+
+                $ISBNM = $_POST["ISBN"];
+                $prestamoM = $_POST["prestamo"];
+                $inicioprestamoM = $_POST["inicioprestamo"];
+                $codiusuariM = $_POST["codiusuari"];
+
+                // Llamar a la clase Libro
+
+                $libro = new Libro();
+
+                // Llamar a la funcion
+
+                $libro->modificarLlibreBiblioteca($ISBNM, $prestamoM, $inicioprestamoM, $codiusuariM);
+
+
+
+
+
 
             
             default:
@@ -316,6 +348,7 @@ ob_clean();
             <option value="mostrar">Mostrar</option>
             <option value="eliminar">Eliminar</option>
             <option value="crear">Crear</option>
+            <option value="modificar">Modificar</option>
         </select>
         <input type="submit" value="Enviar">
     </form>
