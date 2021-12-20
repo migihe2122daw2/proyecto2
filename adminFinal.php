@@ -1,6 +1,7 @@
 <?php
     include './loginCAPBIBLIO.php';
     include './loginBIBLIOTECARI.php';
+    
 
     
 
@@ -14,19 +15,66 @@
         
     }
 
-    if(isset($_POST['opciones'])){
+    if(isset($_POST ['opciones'])){
         
         // Leer el valor de la opción seleccionada
 
-        $opcion = $_POST['opciones'];
+        $opcion = $_POST ['opciones'] ;
     
 
         // Habilitar la opción seleccionada
 
         switch ($opcion) {
             case 'crear':
+
+                include './claseUsuario.php';
                 
-                // Crear un usuario con la clase Admin
+                // Crear un usuario con la clase Usuario
+
+                // Crear un formulario para crear un usuario
+
+                echo "<h1>Crear usuario</h1>";
+                echo "<form action='adminFinal.php?opciones=crear' method='post'>";
+                echo "<p>Nombre: <input type='text' name='nombre'></p>";
+                echo "<p>Apellido1: <input type='text' name='apellido1'></p>";
+                echo "<p>Apellido2: <input type='text' name='apellido2'></p>";
+                echo "<p>Residencia: <input type='text' name='residencia'></p>";
+                echo "<p>Email: <input type='text' name='email'></p>";
+                echo "<p>Telefono: <input type='text' name='telefono'></p>";
+                echo "<p>IdPersonal: <input type='text' name='idPersonal'></p>";
+                echo "<p>Contraseña: <input type='password' name='contrasena'></p>";
+                echo "<p>Prestado: <input type='checkbox' name='prestado'></p>";
+                echo "<p>FechaPrestamo: <input type='text' name='fechaPrestamo'></p>";
+                echo "<p>ISBN: <input type='text' name='ISBN'></p>";
+                echo "<p><input type='submit' name='crear' value='Crear'></p>";
+                echo "</form>";
+
+                // Leer los datos del formulario
+
+                $nombreFormulario = $_POST['nombre'];
+                $apellido1Formulario = $_POST['apellido1'];
+                $apellido2Formulario = $_POST['apellido2'];
+                $residenciaFormulario = $_POST['residencia'];
+                $emailFormulario = $_POST['email'];
+                $telefonoFormulario = $_POST['telefono'];
+                $idPersonalFormulario = $_POST['idPersonal'];
+                $contrasenaFormulario = $_POST['contrasena'];
+                $prestadoFormulario = $_POST['prestado'];
+                $fechaPrestamoFormulario = $_POST['fechaPrestamo'];
+                $ISBNFormulario = $_POST['ISBN'];
+
+                // Crear un usuario con los datos del formulario
+
+                echo "<p>Nombre: $nombreFormulario</p>";
+                echo "<p>Apellido1: $apellido1Formulario</p>";
+                echo "<p>Apellido2: $apellido2Formulario</p>";
+                
+                header("Refresh: 4 adminFinal.php");
+
+                $usuario = new Usuario($nombreFormulario, $apellido1Formulario, $apellido2Formulario, $residenciaFormulario, $emailFormulario, $telefonoFormulario, $idPersonalFormulario, $contrasenaFormulario, $prestadoFormulario, $fechaPrestamoFormulario, $ISBNFormulario);
+            
+
+
 
                 break;
 
@@ -40,44 +88,13 @@
                 
                 // Visualizar los usuarios con la clase Admin
 
-                include_once './adminUsuarios.php';
+                include './claseUsuario.php';
 
                 // Llama a la función mostrarUsuarios()
 
-                $admin = new Admin();
-                
-                $admin->visualizarUsuarios();
+                $usuarios  = new Usuario();
 
-                echo "<table border='1' width='100%'>";
-                echo "<tr>";
-                echo "<th>Nombre</th>";
-                echo "<th>Apellido1</th>";
-                echo "<th>Apellido2</th>";
-                echo "<th>Residencia</th>";
-                echo "<th>Email</th>";
-                echo "<th>Telefono</th>";
-                echo "<th>IdPersonal</th>";
-                echo "<th>Contrasena</th>";
-                echo "<th>Prestado</th>";
-                echo "<th>FechaPrestamo</th>";
-                echo "<th>ISBN</th>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<tr><br></tr>";
-                echo "<td>" . $admin->getNombre() . "</td>"; 
-                echo "<td>" . $admin->getApellido1() . "</td>";
-                echo "<td>" . $admin->getApellido2() . "</td>";
-                echo "<td>" . $admin->getResidencia() . "</td>";
-                echo "<td>" . $admin->getEmail() . "</td>";
-                echo "<td>" . $admin->getTelefono() . "</td>";
-                echo "<td>" . $admin->getIdPersonal() . "</td>";
-                echo "<td>" . $admin->getContrasena() . "</td>";
-                echo "<td>" . $admin->getPrestado() . "</td>";
-                echo "<td>" . $admin->getFechaPrestamo() . "</td>";
-                echo "<td>" . $admin->getISBN() . "</td>";
-                echo "</tr>";
-                echo "</table>";
-                
+                $usuarios->visualizarUsuarios();
 
                 break;
         }
@@ -132,6 +149,8 @@
         </form>
     </div>
     <!-- Poner un formulario con tres opciones: 1. Crear usuarios 2. Visualizar usuarios 3. Elminar usuarios -->
+    <br>
+
     <form action="adminFinal.php" method="post">
         <select name="opciones">
             <option value="crear">Crear usuario</option>

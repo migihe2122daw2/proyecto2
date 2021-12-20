@@ -138,6 +138,8 @@
                     "ISBN: " . $this->ISBN . "<br>";
         }
 
+        
+
         // Método para mostrar el usuario segun su usuario y contrasena
 
         public static function mostrarUsuario($usuario, $contrasena){
@@ -177,6 +179,121 @@
                     // return 
 
                     return $usuari;
+                }
+            }
+            fclose($fp);
+        }
+
+        public function visualizarUsuarios()
+        {
+            // Leer el archivo de usuarios
+
+            $fitxer_usuaris = "usuariPersonal.txt";
+            $fp = fopen($fitxer_usuaris, "r") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer = filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+            }
+
+            // Mostrar todos los usuarios en una tabla
+
+            echo "<table border='1'>";
+            echo "<tr>";
+            echo "<th>Nombre</th>";
+            echo "<th>Apellido1</th>";
+            echo "<th>Apellido2</th>";
+            echo "<th>Residencia</th>";
+            echo "<th>Email</th>";
+            echo "<th>Telefono</th>";
+            echo "<th>IdPersonal</th>";
+            echo "<th>Contrasena</th>";
+            echo "<th>Prestado</th>";
+            echo "<th>FechaPrestamo</th>";
+            echo "<th>ISBN</th>";
+            echo "</tr>";
+            
+            foreach ($usuaris as $usuari) {
+                $datos = explode(":", $usuari);
+
+                echo "<tr>";
+                echo "<td>" . $datos[0] . "</td>";
+                echo "<td>" . $datos[1] . "</td>";
+                echo "<td>" . $datos[2] . "</td>";
+                echo "<td>" . $datos[3] . "</td>";
+                echo "<td>" . $datos[4] . "</td>";
+                echo "<td>" . $datos[5] . "</td>";
+                echo "<td>" . $datos[6] . "</td>";
+                echo "<td>" . $datos[7] . "</td>";
+                echo "<td>" . $datos[8] . "</td>";
+                echo "<td>" . $datos[9] . "</td>";
+                echo "<td>" . $datos[10] . "</td>";
+                echo "</tr>";
+                echo "<br>";
+
+            }
+            echo "</table>";
+            fclose($fp);
+
+            // boton para guardar los usuarios en un pdf
+
+
+            require_once('vendor/autoload.php');
+            
+
+            
+
+
+
+        }
+
+        // Metodo para crear usuarios
+
+        public static function crearUsuario($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN){
+
+            // Abrir el archivo en modo lectura
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "rb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer=filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+            }
+
+            // Crear un nuevo usuario
+
+            $usuari = new Usuario();
+
+            // set de los datos del usuario
+
+            $usuari->setNombre($nombre);
+            $usuari->setApellido1($apellido1);
+            $usuari->setApellido2($apellido2);
+            $usuari->setResidencia($residencia);
+            $usuari->setEmail($email);
+            $usuari->setTelefono($telefono);
+            $usuari->setIdPersonal($idPersonal);
+            $usuari->setContrasena($contrasena);
+            $usuari->setPrestado($prestado);
+            $usuari->setFechaPrestamo($fechaPrestamo);
+            $usuari->setISBN($ISBN);
+
+            // Pasar a string el usuario
+            $usuari = $usuari->toString();
+
+            // Añadir el usuario al archivo
+
+            $usuaris[] = $usuari;
+
+            // Guardar el archivo
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "wb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                foreach ($usuaris as $usuari) {
+                    fwrite($fp, $usuari . PHP_EOL);
                 }
             }
             fclose($fp);
