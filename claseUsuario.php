@@ -261,6 +261,42 @@ ob_clean();
 
         }
 
+        // Método para guardar un usuario
+
+        public function guardarUsuario($nombreFormulario, $apellido1Formulario, $apellido2Formulario, $residenciaFormulario, $emailFormulario, $telefonoFormulario, $idPersonalFormulario, $contrasenaFormulario, $prestadoFormulario, $fechaPrestamoFormulario, $ISBNFormulario){
+
+            // Abrir el archivo en modo escritura
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris,"a+") or die ("No s'ha pogut validar l'usuari");
+
+            // Sustituir variables vacias
+
+            if ($prestadoFormulario == "") {
+                $prestadoFormulario = "false";
+            }
+
+            if ($fechaPrestamoFormulario == "") {
+                $fechaPrestamoFormulario = "0";
+            }
+
+            if ($ISBNFormulario == "") {
+                $ISBNFormulario = "0";
+            }
+
+            // Si el nombre o el apellido1 o apelido2 estan vacios, no se guarda el usuario
+
+            if ($nombreFormulario != "" && $apellido1Formulario != "" && $apellido2Formulario != "") {
+                // Guardar el usuario en el archivo
+
+                fwrite($fp, $nombreFormulario . ":" . $apellido1Formulario . ":" . $apellido2Formulario . ":" . $residenciaFormulario . ":" . $emailFormulario . ":" . $telefonoFormulario . ":" . $idPersonalFormulario . ":" . $contrasenaFormulario . ":" . $prestadoFormulario . ":" . $fechaPrestamoFormulario . ":" . $ISBNFormulario . PHP_EOL);
+            }
+
+            // Cerrar el archivo
+
+            fclose($fp);
+        }
+
         // Metodo para crear usuarios
 
         public static function crearUsuario($nombre, $apellido1, $apellido2, $residencia, $email, $telefono, $idPersonal, $contrasena, $prestado, $fechaPrestamo, $ISBN){
@@ -311,6 +347,69 @@ ob_clean();
                 }
             }
             fclose($fp);
+        }
+
+        // Metodo para eliminar un usuario
+
+        public static function eliminarUsuario($idPersonal){
+
+            // Abrir el archivo en modo lectura
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "rb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer=filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+            }
+
+            // Eliminar el usuario
+
+            foreach ($usuaris as $usuari) {
+                $datos = explode(":", $usuari);
+                if ($datos[6] == $idPersonal) {
+                    $usuaris = array_diff($usuaris, array($usuari));
+                }
+            }
+
+            // Guardar el archivo
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "wb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                foreach ($usuaris as $usuari) {
+                    fwrite($fp, $usuari . PHP_EOL);
+                }
+            }
+            fclose($fp);
+
+            // Eliminar lineas vacias al final del archivo
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "rb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                $mida_fitxer=filesize($fitxer_usuaris);
+                $usuaris = explode(PHP_EOL, fread($fp, $mida_fitxer));
+            }
+
+            $usuaris = array_diff($usuaris, array(''));
+
+            // Guardar el archivo
+
+            $fitxer_usuaris="usuariPersonal.txt";
+            $fp=fopen($fitxer_usuaris, "wb") or die("No s'ha pogut validar l'usuari");
+
+            if ($fp) {
+                foreach ($usuaris as $usuari) {
+                    fwrite($fp, $usuari . PHP_EOL);
+                }
+            }
+
+            fclose($fp);
+
+            
         }
     }
 

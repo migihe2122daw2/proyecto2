@@ -4,7 +4,8 @@ ob_clean();
 
 include_once "claseUsuario.php";
 
-    class Libro extends Usuario{
+    class Libro extends Usuario
+    {
         private $titol;
         private $autor;
         public $ISBN;
@@ -15,7 +16,8 @@ include_once "claseUsuario.php";
 
         // Constructor por defecto
 
-        public function __construct(){
+        public function __construct()
+        {
             $this->titol = "";
             $this->autor = "";
             $this->ISBN = "";
@@ -27,59 +29,72 @@ include_once "claseUsuario.php";
 
         // Getters
 
-        public function getTitol(){
+        public function getTitol()
+        {
             return $this->titol;
         }
 
-        public function getAutor(){
+        public function getAutor()
+        {
             return $this->autor;
         }
 
-        public function getISBN(){
+        public function getISBN()
+        {
             return $this->ISBN;
         }
 
-        public function getPrestec(){
+        public function getPrestec()
+        {
             return $this->prestec;
         }
 
-        public function getIniciprestec(){
+        public function getIniciprestec()
+        {
             return $this->iniciprestec;
         }
 
-        public function getCodiusuari(){
+        public function getCodiusuari()
+        {
             return $this->codiusuari;
         }
 
         // Setters
 
-        public function setTitol($titol){
+        public function setTitol($titol)
+        {
             $this->titol = $titol;
         }
 
-        public function setAutor($autor){
+        public function setAutor($autor)
+        {
             $this->autor = $autor;
         }
 
-        public function setISBN($ISBN){
+        public function setISBN($ISBN)
+        {
             $this->ISBN = $ISBN;
         }
 
-        public function setPrestec($prestec){
+        public function setPrestec($prestec)
+        {
             $this->prestec = $prestec;
         }
 
-        public function setIniciprestec($iniciprestec){
+        public function setIniciprestec($iniciprestec)
+        {
             $this->iniciprestec = $iniciprestec;
         }
 
-        public function setCodiusuari($codiusuari){
+        public function setCodiusuari($codiusuari)
+        {
             $this->codiusuari = $codiusuari;
         }
 
         // Mètodes
 
-        public function mostrar(){
+        public function mostrar()
+        {
 
             // Mostrar els llibres de l'arxiu de text
 
@@ -114,7 +129,8 @@ include_once "claseUsuario.php";
 
         // Metode per crear un nou llibre al fitxer de text desde la clase Biblioteca
 
-        public function crearLlibreBiblioteca(){
+        public function crearLlibreBiblioteca()
+        {
             $fitxer = fopen("Llibres.txt", "a");
             
             // Usar getters per obtenir els valors dels atributs de la clase
@@ -144,18 +160,17 @@ include_once "claseUsuario.php";
                 $iniciprestecC;
                 if ($iniciprestecC == "") {
 
-                    // Limpiar la pantalla 
+                    // Limpiar la pantalla
 
                     ob_clean();
                     echo "No has introduit cap data de prestec";
                     header("Refresh: 3 catalegbiblio.php?mostrar=crear");
-                }else{
+                } else {
 
                     // Haz un set de Prestec y de Inicprestec
 
                     $this->setPrestec($prestecC);
                     $this->setIniciprestec($iniciprestecC);
-
                 }
             } else {
                 $iniciprestecC = "0";
@@ -199,15 +214,14 @@ include_once "claseUsuario.php";
                     ob_clean();
                     echo "Llibre creat correctament";
                     header("Refresh: 3 catalegbiblio.php");
-                                       
                 }
             }
-
         }
 
         // Metodo para eliminar libros de la clase
 
-        public function eliminarLlibreBiblioteca(){
+        public function eliminarLlibreBiblioteca()
+        {
             $fitxer = fopen("Llibres.txt", "r");
             $fitxer2 = fopen("Llibres2.txt", "w");
             while (!feof($fitxer)) {
@@ -236,12 +250,12 @@ include_once "claseUsuario.php";
             // Eliminar el \n de la ultima linea
 
             $ultimaLinea = substr($ultimaLinea, 0, $numeroCaracteres - 1);
-        
         }
 
         // Metodo prestec llibre
 
-        public function prestecLlibreBiblioteca($codiusuariB){
+        public function prestecLlibreBiblioteca($codiusuariB)
+        {
 
             // Comparar el codi de l'usuari que esta intentant prestar el llibre amb els ususaris
 
@@ -303,13 +317,14 @@ include_once "claseUsuario.php";
 
         // Metodo para modificar libros de la clase
 
-        public function modificarLlibreBiblioteca($isbn, $prestado, $inicprestec, $codiusuari){
+        public function modificarLlibreBiblioteca($isbn, $prestado, $inicprestec, $codiusuari)
+        {
             $fitxer = fopen("Llibres.txt", "r");
             $fitxer2 = fopen("Llibres2.txt", "w");
             
             // CAmbia el estado de prestamo del libro y usuario asociado al libro
 
-            // Buscar el libro con el ISBN que se quiere modificar 
+            // Buscar el libro con el ISBN que se quiere modificar
 
             while (!feof($fitxer)) {
                 $linea = fgets($fitxer);
@@ -318,7 +333,7 @@ include_once "claseUsuario.php";
 
                     // Cambiar el estado del checkbox a true o false
 
-                    if($prestado == "on"){
+                    if ($prestado == "on") {
                         $prestado = "true";
                     } else {
                         $prestado = "false";
@@ -331,12 +346,13 @@ include_once "claseUsuario.php";
                         $inicprestec = "0";
                         $codiusuari = "0";
                         $isbn = "0";
+                        $this->modificarPrestamoUsuario();
                     }
 
 
                     fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $prestado . ":" . $inicprestec . ":" . "$codiusuari");
                 } else {
-                    fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $llibre[3] . ":" . $llibre[4] . ":" . $llibre[5]);    
+                    fwrite($fitxer2, $llibre[0] . ":" . $llibre[1] . ":" . $llibre[2] . ":" . $llibre[3] . ":" . $llibre[4] . ":" . $llibre[5]);
                 }
             }
 
@@ -347,7 +363,12 @@ include_once "claseUsuario.php";
             rename("Llibres2.txt", "Llibres.txt");
 
             // Modificar el estado del usuario
+        }
 
+        // Metodo para modificar prestamos de usuarios
+
+        public function modificarPrestamoUsuario()
+        {
             $fitxer = fopen("usuariPersonal.txt", "r");
             $fitxer2 = fopen("usuariPersonal2.txt", "w");
 
@@ -355,27 +376,19 @@ include_once "claseUsuario.php";
                 $linea = fgets($fitxer);
                 $usuari = explode(":", $linea);
                 if ($usuari[6] == $codiusuari) {
-                    if($prestado == "on"){
-                        $prestado = "true";
-                    } else {
-                        $prestado = "false";
-                    }
-                    if ($prestado == "false" && $inicprestec == "") {
-                        $inicprestec = "0";
-                        $codiusuari = "0";
-                        $isbn = "0";
-                    }
                     fwrite($fitxer2, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $prestado . ":" . $inicprestec . ":" . $isbn);
                 } else {
                     fwrite($fitxer2, $usuari[0] . ":" . $usuari[1] . ":" . $usuari[2] . ":" . $usuari[3] . ":" . $usuari[4] . ":" . $usuari[5] . ":" . $usuari[6] . ":" . $usuari[7] . ":" . $usuari[8] . ":" . $usuari[9] . ":" . $usuari[10]);
                 }
             }
 
+            fclose($fitxer);
+            fclose($fitxer2);
+
+            unlink("usuariPersonal.txt");
+            rename("usuariPersonal2.txt", "usuariPersonal.txt");
         }
 
-    
-
-
-
     }
+
 ?>

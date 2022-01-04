@@ -1,4 +1,6 @@
 La rebelio dels animals:George Orwell:8496863239:no:N/A:0
 Dime quien soy:Julia Navarro:5416363638:no:N/A:0
 Indigno de ser humano:Osamu Dazai:7245757:true:2021-12-26:54235
-Libro:Autor:5325:false:0:0
+Libro:Autor:5325:true:2021-12-15:UsuariAntonio
+Libro:Autor:53253342434234:false:0:0
+:::false:0:0

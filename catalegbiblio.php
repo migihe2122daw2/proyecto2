@@ -286,6 +286,11 @@ ob_clean();
 
                 $libro->modificarLlibreBiblioteca($ISBNM, $prestamoM, $inicioprestamoM, $codiusuariM);
 
+                $libro2 = new Libro();
+
+                $libro2->modificarPrestamoUsuario($ISBNM, $prestamoM, $inicioprestamoM, $codiusuariM);
+
+
 
 
 

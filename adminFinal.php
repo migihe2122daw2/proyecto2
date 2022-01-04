@@ -18,11 +18,11 @@
         
     }
 
-    if(isset($_POST ['opciones'])){
+    if(isset($_GET ['opciones'])){
         
         // Leer el valor de la opción seleccionada
 
-        $opcion = $_POST ['opciones'] ;
+        $opcion = strtolower($_GET['opciones']);
     
 
         // Habilitar la opción seleccionada
@@ -70,22 +70,40 @@
 
                 // Crear un usuario con los datos del formulario
 
-                echo "<p>Nombre: $nombreFormulario</p>";
-                echo "<p>Apellido1: $apellido1Formulario</p>";
-                echo "<p>Apellido2: $apellido2Formulario</p>";
+
+                $usuario = new Usuario();
+
+                // Guardar el usuario en el archivo
+
+                $usuario->guardarUsuario($nombreFormulario, $apellido1Formulario, $apellido2Formulario, $residenciaFormulario, $emailFormulario, $telefonoFormulario, $idPersonalFormulario, $contrasenaFormulario, $prestadoFormulario, $fechaPrestamoFormulario, $ISBNFormulario);
+
                 
-                header("Refresh: 4 adminFinal.php");
-
-                $usuario = new Usuario($nombreFormulario, $apellido1Formulario, $apellido2Formulario, $residenciaFormulario, $emailFormulario, $telefonoFormulario, $idPersonalFormulario, $contrasenaFormulario, $prestadoFormulario, $fechaPrestamoFormulario, $ISBNFormulario);
-            
-
-
-
                 break;
 
             case 'eliminar':
+
+                include './claseUsuario.php';
                 
-                // Eliminar un usuario con la clase Admin
+                // Eliminar un usuario por su idPersonal
+
+                // Crear un formulario para eliminar un usuario
+
+                echo "<h1>Eliminar usuario</h1>";
+                echo "<form action='adminFinal.php?opciones=eliminar' method='post'>";
+                echo "<p>IdPersonal: <input type='text' name='idPersonal'></p>";
+                echo "<p><input type='submit' name='eliminar' value='Eliminar'></p>";
+                echo "</form>";
+
+                // Leer el idPersonal del formulario
+
+                $idPersonalFormulario = $_POST['idPersonal'];
+
+                // Usar $_DELETE para eliminar el usuario
+
+                $usuario = new Usuario();
+
+                $usuario->eliminarUsuario($idPersonalFormulario);
+
 
                 break;
 
@@ -156,7 +174,7 @@
     <!-- Poner un formulario con tres opciones: 1. Crear usuarios 2. Visualizar usuarios 3. Elminar usuarios -->
     <br>
 
-    <form action="adminFinal.php" method="post">
+    <form action="adminFinal.php">
         <select name="opciones">
             <option value="crear">Crear usuario</option>
             <option value="visualizar">Visualizar usuarios</option>
